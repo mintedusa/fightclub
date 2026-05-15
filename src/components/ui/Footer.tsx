@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { Dumbbell } from 'lucide-react';
 
 function FacebookIcon({ className }: { className?: string }) {
   return (
@@ -41,10 +40,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           <div>
-            <div className="flex items-center gap-2 mb-3">
-              <Dumbbell className="text-gold w-6 h-6" />
-              <span className="text-gold font-black text-xl">FC</span>
-              <span className="text-white font-semibold">FightClub Galați</span>
+            <div className="mb-3">
+              <img src="/logo.png" alt="FightClub Galați" className="h-10 w-auto" />
             </div>
             <p className="text-muted text-sm leading-relaxed">
               Forjează-ți limitele la FightClub Galați. Sala de fitness #1 din Galați.

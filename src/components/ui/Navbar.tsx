@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Dumbbell } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useNavbarScroll } from '../../hooks/useNavbarScroll';
 import type { NavItem } from '../../types';
 
@@ -24,12 +24,8 @@ export default function Navbar() {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
-          <Dumbbell className="text-gold w-6 h-6" />
-          <span className="text-gold font-black text-xl tracking-tight">FC</span>
-          <span className="text-white font-semibold text-sm hidden sm:block">
-            FightClub Galați
-          </span>
+        <Link to="/" className="flex items-center">
+          <img src="/logo.png" alt="FightClub Galați" className="h-8 w-auto" />
         </Link>
 
         <ul className="hidden md:flex items-center gap-8">
