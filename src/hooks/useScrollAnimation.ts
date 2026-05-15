@@ -28,9 +28,10 @@ export function useScrollAnimation<T extends HTMLElement = HTMLElement>(
           y: 0,
           duration: options?.duration ?? 0.8,
           ease: 'power2.out',
+          immediateRender: false,
           scrollTrigger: {
             trigger: el,
-            start: options?.start ?? 'top 85%',
+            start: options?.start ?? 'top 90%',
             once: true,
             invalidateOnRefresh: true,
           },

@@ -15,14 +15,14 @@ export default function Layout() {
     const lenis = (window as Window & { __lenis?: LenisInstance }).__lenis;
     lenis?.scrollTo(0, { immediate: true });
     // Recalculează pozițiile ScrollTrigger după ce noul DOM e randat
-    const id = setTimeout(() => ScrollTrigger.refresh(), 150);
+    const id = setTimeout(() => ScrollTrigger.refresh(), 350);
     return () => clearTimeout(id);
   }, [location.pathname]);
 
   return (
     <>
       <Navbar />
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="sync">
         <motion.div
           key={location.pathname}
           initial={{ opacity: 0 }}
