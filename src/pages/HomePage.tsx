@@ -3,6 +3,7 @@ import HeroSection from '../components/sections/HeroSection';
 import StatsSection from '../components/sections/StatsSection';
 import ClassesSection from '../components/sections/ClassesSection';
 import TrainersSection from '../components/sections/TrainersSection';
+import PricingSection from '../components/sections/PricingSection';
 
 export default function HomePage() {
   return (
@@ -11,6 +12,7 @@ export default function HomePage() {
       <StatsSection />
       <ClassesSection />
       <TrainersSection />
+      <PricingSection />
     </>
   );
 }
