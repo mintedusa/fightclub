@@ -40,3 +40,19 @@ export interface NavItem {
   label: string;
   href: string;
 }
+
+export type DayKey =
+  | 'luni'
+  | 'marti'
+  | 'miercuri'
+  | 'joi'
+  | 'vineri'
+  | 'sambata'
+  | 'duminica';
+
+export interface ScheduleEntry {
+  classId: string;
+  day: DayKey;
+  startTime: string;
+  endTime: string;
+}
