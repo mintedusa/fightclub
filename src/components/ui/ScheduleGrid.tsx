@@ -87,7 +87,7 @@ export default function ScheduleGrid() {
                     <span className="text-muted text-sm font-medium">Închis</span>
                   </div>
                 ) : (
-                  dayEntries.map((entry, idx) => {
+                  dayEntries.map((entry) => {
                     const cls = classMap[entry.classId];
                     if (!cls) return null;
                     const color = categoryColors[cls.category as keyof typeof categoryColors] ?? '#F5C518';
@@ -182,7 +182,7 @@ function MobileDayList({ day }: { day: DayKey }) {
 
   return (
     <div className="space-y-3">
-      {dayEntries.map((entry, idx) => {
+      {dayEntries.map((entry) => {
         const cls = classMap[entry.classId];
         if (!cls) return null;
         const color = categoryColors[cls.category as keyof typeof categoryColors] ?? '#F5C518';
