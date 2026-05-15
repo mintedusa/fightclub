@@ -24,9 +24,9 @@ export default function Navbar() {
         scrolled ? 'bg-dark/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
         <Link to="/" className="flex items-center">
-          <img src={logoUrl} alt="FightClub Galați" className="h-12 w-auto" />
+          <img src={logoUrl} alt="FightClub Galați" className="h-[72px] w-auto" />
         </Link>
 
         <ul className="hidden md:flex items-center gap-8">
@@ -36,7 +36,7 @@ export default function Navbar() {
                 to={item.href}
                 end={item.href === '/'}
                 className={({ isActive }) =>
-                  `text-sm font-medium transition-colors ${
+                  `text-[16px] font-medium transition-colors ${
                     isActive ? 'text-gold' : 'text-white/80 hover:text-white'
                   }`
                 }
@@ -72,7 +72,7 @@ export default function Navbar() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'tween', duration: 0.3 }}
-            className="fixed inset-0 top-16 bg-dark z-40 flex flex-col p-8 gap-6"
+            className="fixed inset-0 top-20 bg-dark z-40 flex flex-col p-8 gap-6"
           >
             {navItems.map((item) => (
               <NavLink
