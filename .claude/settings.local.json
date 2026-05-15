@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Skill(superpowers:writing-plans)",
+      "Skill(superpowers:writing-plans:*)",
+      "Skill(superpowers:subagent-driven-development)",
+      "Skill(superpowers:subagent-driven-development:*)",
+      "Bash(npm create *)",
+      "Bash(npm --version)",
+      "Read(//Users/filimoncristian/.nvm/versions/**)",
+      "Read(//usr/local/bin/**)",
+      "Bash(brew list *)",
+      "Read(//opt/homebrew/**)",
+      "Bash(ls ~/.nvm/versions/node/ 2>/dev/null || echo \"nvm not available\"; ls /opt/homebrew/opt/ 2>/dev/null | grep node; ls /usr/local/opt/ 2>/dev/null | grep node)",
+      "Read(//usr/local/opt/**)",
+      "Bash(ls /usr/local/opt/node@20/bin/)",
+      "Read(//usr/local/Cellar/node/20.8.0/bin/**)",
+      "Bash(/usr/local/opt/node@20/bin/node --version)",
+      "Bash(/usr/local/opt/node@20/lib/node_modules/npm/bin/npm-cli.js --version)",
+      "Read(//usr/local/Cellar/node/20.8.0/**)",
+      "Bash(export PATH=\"/usr/local/opt/node@20/bin:/usr/local/opt/node@20/libexec/bin:$PATH\")",
+      "Bash(npm cache *)",
+      "Bash(rm -rf /Users/filimoncristian/.npm/_npx/1415fee72ff6294b)",
+      "Bash(npm install *)",
+      "Bash(timeout 15 npm run dev)",
+      "Bash(git checkout *)",
+      "Bash(node -e \"const pkg = require\\('/Users/filimoncristian/Sites/fightclub/package.json'\\); const deps = {...pkg.dependencies, ...pkg.devDependencies}; const required = ['framer-motion','gsap','@studio-freight/lenis','react-router-dom','zustand','@emailjs/browser','react-hot-toast','react-helmet-async','react-countup','swiper','lucide-react','tailwindcss','@tailwindcss/vite']; const missing = required.filter\\(d => !deps[d]\\); console.log\\('Missing:', missing.length ? missing : 'none'\\); console.log\\('Tailwind version:', deps['tailwindcss']\\); console.log\\('Vite version:', deps['vite']\\);\")",
+      "Bash(git -C /Users/filimoncristian/Sites/fightclub diff --stat 55c158b..ffc44ca)",
+      "Bash(git -C /Users/filimoncristian/Sites/fightclub log --oneline 55c158b..ffc44ca)",
+      "Bash(git -C /Users/filimoncristian/Sites/fightclub diff 55c158b..ffc44ca -- vite.config.ts src/index.css package.json)",
+      "Bash(git -C /Users/filimoncristian/Sites/fightclub diff 55c158b..ffc44ca -- src/main.tsx src/App.tsx src/App.css index.html tsconfig.app.json tsconfig.json)",
+      "Bash(python3 -c ' *)"
+    ]
+  }
+}
