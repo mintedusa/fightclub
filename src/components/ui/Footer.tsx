@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import logoUrl from '../../assets/logo.png';
 
 function FacebookIcon({ className }: { className?: string }) {
   return (
@@ -41,7 +42,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           <div>
             <div className="mb-3">
-              <img src="/logo.png" alt="FightClub Galați" className="h-10 w-auto" />
+              <img src={logoUrl} alt="FightClub Galați" className="h-14 w-auto" />
             </div>
             <p className="text-muted text-sm leading-relaxed">
               Forjează-ți limitele la FightClub Galați. Sala de fitness #1 din Galați.

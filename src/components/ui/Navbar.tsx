@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useNavbarScroll } from '../../hooks/useNavbarScroll';
 import type { NavItem } from '../../types';
+import logoUrl from '../../assets/logo.png';
 
 const navItems: NavItem[] = [
   { label: 'Acasă',    href: '/'         },
@@ -25,7 +26,7 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center">
-          <img src="/logo.png" alt="FightClub Galați" className="h-8 w-auto" />
+          <img src={logoUrl} alt="FightClub Galați" className="h-12 w-auto" />
         </Link>
 
         <ul className="hidden md:flex items-center gap-8">
