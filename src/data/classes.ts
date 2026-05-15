@@ -1,0 +1,58 @@
+import type { GymClass } from '../types';
+
+export const classes: GymClass[] = [
+  {
+    id: 'box-thai',
+    title: 'Box Thai',
+    level: 'Intermediar',
+    schedule: 'L / M / V  18:00 - 19:30',
+    image: 'https://images.unsplash.com/photo-1555597673-b21d5c935865?w=600&q=80',
+    description: 'Antrenament complet care combină tehnici de box cu lovituri de picior specifice muay thai.',
+    category: 'Lupte',
+  },
+  {
+    id: 'crossfit',
+    title: 'CrossFit',
+    level: 'Avansat',
+    schedule: 'M / J / S  07:00 - 08:30',
+    image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80',
+    description: 'Antrenamente de intensitate ridicată cu exerciții funcționale variate zilnic.',
+    category: 'Funcțional',
+  },
+  {
+    id: 'yoga',
+    title: 'Yoga',
+    level: 'Începător',
+    schedule: 'M / V  10:00 - 11:00',
+    image: 'https://images.unsplash.com/photo-1603988363607-e1e4a66962c6?w=600&q=80',
+    description: 'Sesiuni de yoga pentru flexibilitate, echilibru mental și recuperare musculară.',
+    category: 'Wellness',
+  },
+  {
+    id: 'spinning',
+    title: 'Spinning',
+    level: 'Toate nivelele',
+    schedule: 'L / M / J  19:00 - 20:00',
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+    description: 'Cardio intens pe bicicletă staționară cu muzică energizantă și instructor motivator.',
+    category: 'Cardio',
+  },
+  {
+    id: 'mma',
+    title: 'MMA',
+    level: 'Avansat',
+    schedule: 'M / V  20:00 - 21:30',
+    image: 'https://images.unsplash.com/photo-1517438476312-10d79c077509?w=600&q=80',
+    description: 'Arte marțiale mixte — grappling, box și lupte la sol pentru combatanți serioși.',
+    category: 'Lupte',
+  },
+  {
+    id: 'kickbox',
+    title: 'Kickbox',
+    level: 'Intermediar',
+    schedule: 'L / J  17:00 - 18:30',
+    image: 'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=600&q=80',
+    description: 'Combinație de box și lovituri de picior, ideal pentru condiție fizică și autoapărare.',
+    category: 'Lupte',
+  },
+];
