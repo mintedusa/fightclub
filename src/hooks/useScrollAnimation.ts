@@ -32,6 +32,7 @@ export function useScrollAnimation<T extends HTMLElement = HTMLElement>(
             trigger: el,
             start: options?.start ?? 'top 85%',
             once: true,
+            invalidateOnRefresh: true,
           },
         },
       );
