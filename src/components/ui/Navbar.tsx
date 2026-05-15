@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon, Menu, X, Dumbbell } from 'lucide-react';
-import { useThemeStore } from '../../store/useThemeStore';
+import { Menu, X, Dumbbell } from 'lucide-react';
 import { useNavbarScroll } from '../../hooks/useNavbarScroll';
 import type { NavItem } from '../../types';
 
@@ -15,7 +14,6 @@ const navItems: NavItem[] = [
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { theme, toggle } = useThemeStore();
   const scrolled = useNavbarScroll(80);
 
   return (
@@ -52,18 +50,6 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center gap-3">
-          <button
-            onClick={toggle}
-            className="p-2 text-white/70 hover:text-gold transition-colors"
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? (
-              <Sun className="w-5 h-5" />
-            ) : (
-              <Moon className="w-5 h-5" />
-            )}
-          </button>
-
           <Link
             to="/contact"
             className="hidden md:block bg-gold text-dark text-sm font-bold px-4 py-2 rounded hover:bg-gold-dark transition-colors"
