@@ -93,10 +93,11 @@ export default function ScheduleGrid() {
                     const color = categoryColors[cls.category as keyof typeof categoryColors] ?? '#F5C518';
                     return (
                       <motion.div
-                        key={idx}
+                        key={`${entry.day}-${entry.classId}-${entry.startTime}`}
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
+                        animate={{ zIndex: 1 }}
                         transition={{ delay: idx * 0.05, duration: 0.3 }}
                         whileHover={{ scale: 1.04, zIndex: 20 }}
                         className="absolute left-1 right-1 rounded p-1.5 overflow-hidden cursor-default"
@@ -104,7 +105,6 @@ export default function ScheduleGrid() {
                           top: `${timeToPercent(entry.startTime)}%`,
                           height: `${durationToPercent(entry.startTime, entry.endTime)}%`,
                           backgroundColor: color + 'CC',
-                          zIndex: 1,
                         }}
                       >
                         <p className="text-white text-[11px] font-bold leading-tight truncate">
@@ -188,7 +188,7 @@ function MobileDayList({ day }: { day: DayKey }) {
         const color = categoryColors[cls.category as keyof typeof categoryColors] ?? '#F5C518';
         return (
           <div
-            key={idx}
+            key={`${entry.day}-${entry.classId}`}
             className="flex items-start gap-3 p-4 rounded-lg bg-surface"
             style={{ borderLeft: `4px solid ${color}` }}
           >
