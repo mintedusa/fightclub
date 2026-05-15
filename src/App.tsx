@@ -8,19 +8,22 @@ import TrainersPage from './pages/TrainersPage';
 import ContactPage from './pages/ContactPage';
 import SchedulePage from './pages/SchedulePage';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Layout />,
-    children: [
-      { index: true, element: <HomePage /> },
-      { path: 'clase', element: <ClassesPage /> },
-      { path: 'orar', element: <SchedulePage /> },
-      { path: 'traineri', element: <TrainersPage /> },
-      { path: 'contact', element: <ContactPage /> },
-    ],
-  },
-]);
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <Layout />,
+      children: [
+        { index: true, element: <HomePage /> },
+        { path: 'clase', element: <ClassesPage /> },
+        { path: 'orar', element: <SchedulePage /> },
+        { path: 'traineri', element: <TrainersPage /> },
+        { path: 'contact', element: <ContactPage /> },
+      ],
+    },
+  ],
+  { basename: '/fightclub' },
+);
 
 export default function App() {
   return (
