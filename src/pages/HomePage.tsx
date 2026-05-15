@@ -4,6 +4,7 @@ import StatsSection from '../components/sections/StatsSection';
 import ClassesSection from '../components/sections/ClassesSection';
 import TrainersSection from '../components/sections/TrainersSection';
 import PricingSection from '../components/sections/PricingSection';
+import TestimonialsSection from '../components/sections/TestimonialsSection';
 
 export default function HomePage() {
   return (
@@ -13,6 +14,7 @@ export default function HomePage() {
       <ClassesSection />
       <TrainersSection />
       <PricingSection />
+      <TestimonialsSection />
     </>
   );
 }
