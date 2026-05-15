@@ -1,50 +1,55 @@
-# React + TypeScript + Vite
+# FightClub Galați
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Site complet pentru sala de fitness FightClub Galați. React 19 + Vite + TypeScript + Tailwind CSS v4.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js 20+
+- npm 9+
 
-## Expanding the ESLint configuration
+## Instalare
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+git clone <repo-url>
+cd fightclub
+npm install
+cp .env.example .env.local
+# editează .env.local cu datele tale
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Configurare EmailJS
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. Creează cont la [emailjs.com](https://www.emailjs.com/)
+2. Adaugă un **Email Service** (Gmail, Outlook etc.)
+3. Creează un **Email Template** cu variabilele: `{{from_name}}`, `{{from_email}}`, `{{phone}}`, `{{message}}`
+4. Copiază **Service ID**, **Template ID** și **Public Key** în `.env.local`
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+## Configurare video Hero (opțional)
+
 ```
+VITE_HERO_VIDEO_URL=https://your-cdn.com/hero.mp4
+```
+
+Fără această variabilă se afișează imaginea fallback Unsplash.
+
+## Comenzi
+
+```bash
+npm run dev       # development server
+npm run build     # build producție
+npm run preview   # preview build local
+```
+
+## Pagini
+
+| Rută | Descriere |
+|---|---|
+| `/` | Landing page (Hero, Stats, Clase, Traineri, Prețuri, Testimoniale, Galerie, Contact) |
+| `/clase` | Grid clase cu filtre după nivel |
+| `/traineri` | Grid profiluri traineri cu flip card |
+| `/contact` | Formular + Google Maps |
+
+## Stack
+
+React 19 · Vite · TypeScript · Tailwind CSS v4 · Motion · GSAP + ScrollTrigger · Lenis · React Router v7 · Zustand · Swiper · react-countup · EmailJS · react-hot-toast · react-helmet-async
