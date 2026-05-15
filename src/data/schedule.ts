@@ -24,7 +24,7 @@ export const scheduleEntries: ScheduleEntry[] = [
   { classId: 'kickbox', day: 'joi',  startTime: '17:00', endTime: '18:30' },
 ];
 
-export const categoryColors: Record<string, string> = {
+export const categoryColors: Record<'Lupte' | 'Cardio' | 'Funcțional' | 'Wellness', string> = {
   Lupte:      '#EF4444',
   Cardio:     '#3B82F6',
   Funcțional: '#22C55E',
