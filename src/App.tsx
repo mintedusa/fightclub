@@ -1,3 +1,39 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import { Toaster } from 'react-hot-toast';
+import Layout from './components/ui/Layout';
+import HomePage from './pages/HomePage';
+import ClassesPage from './pages/ClassesPage';
+import TrainersPage from './pages/TrainersPage';
+import ContactPage from './pages/ContactPage';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: 'clase', element: <ClassesPage /> },
+      { path: 'traineri', element: <TrainersPage /> },
+      { path: 'contact', element: <ContactPage /> },
+    ],
+  },
+]);
+
 export default function App() {
-  return <div>FightClub Galați</div>
+  return (
+    <HelmetProvider>
+      <RouterProvider router={router} />
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          style: {
+            background: '#1A1A1A',
+            color: '#fff',
+            border: '1px solid #F5C518',
+          },
+        }}
+      />
+    </HelmetProvider>
+  );
 }
