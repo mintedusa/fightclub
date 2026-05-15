@@ -6,10 +6,11 @@ import { useNavbarScroll } from '../../hooks/useNavbarScroll';
 import type { NavItem } from '../../types';
 
 const navItems: NavItem[] = [
-  { label: 'Acasă', href: '/' },
-  { label: 'Clase', href: '/clase' },
+  { label: 'Acasă',    href: '/'         },
+  { label: 'Clase',    href: '/clase'    },
+  { label: 'Orar',     href: '/orar'     },
   { label: 'Traineri', href: '/traineri' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Contact',  href: '/contact'  },
 ];
 
 export default function Navbar() {

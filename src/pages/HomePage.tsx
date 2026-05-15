@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import HeroSection from '../components/sections/HeroSection';
 import StatsSection from '../components/sections/StatsSection';
 import ClassesSection from '../components/sections/ClassesSection';
+import ScheduleSection from '../components/sections/ScheduleSection';
 import TrainersSection from '../components/sections/TrainersSection';
 import PricingSection from '../components/sections/PricingSection';
 import TestimonialsSection from '../components/sections/TestimonialsSection';
@@ -22,6 +23,7 @@ export default function HomePage() {
       <HeroSection />
       <StatsSection />
       <ClassesSection />
+      <ScheduleSection />
       <TrainersSection />
       <PricingSection />
       <TestimonialsSection />

@@ -26,10 +26,11 @@ function YoutubeIcon({ className }: { className?: string }) {
 }
 
 const navLinks = [
-  { label: 'Acasă', href: '/' },
-  { label: 'Clase', href: '/clase' },
+  { label: 'Acasă',    href: '/'         },
+  { label: 'Clase',    href: '/clase'    },
+  { label: 'Orar',     href: '/orar'     },
   { label: 'Traineri', href: '/traineri' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Contact',  href: '/contact'  },
 ];
 
 const classLinks = ['Box Thai', 'CrossFit', 'Yoga', 'Spinning', 'MMA', 'Kickbox'];

@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import ClassesPage from './pages/ClassesPage';
 import TrainersPage from './pages/TrainersPage';
 import ContactPage from './pages/ContactPage';
+import SchedulePage from './pages/SchedulePage';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       { path: 'clase', element: <ClassesPage /> },
       { path: 'traineri', element: <TrainersPage /> },
       { path: 'contact', element: <ContactPage /> },
+      { path: 'orar', element: <SchedulePage /> },
     ],
   },
 ]);

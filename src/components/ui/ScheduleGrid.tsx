@@ -87,7 +87,7 @@ export default function ScheduleGrid() {
                     <span className="text-muted text-sm font-medium">Închis</span>
                   </div>
                 ) : (
-                  dayEntries.map((entry) => {
+                  dayEntries.map((entry, idx) => {
                     const cls = classMap[entry.classId];
                     if (!cls) return null;
                     const color = categoryColors[cls.category as keyof typeof categoryColors] ?? '#F5C518';
