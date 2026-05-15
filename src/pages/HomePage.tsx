@@ -1,3 +1,6 @@
+// src/pages/HomePage.tsx
+import HeroSection from '../components/sections/HeroSection';
+
 export default function HomePage() {
-  return <div className="pt-16 min-h-screen">Home</div>;
+  return <HeroSection />;
 }
