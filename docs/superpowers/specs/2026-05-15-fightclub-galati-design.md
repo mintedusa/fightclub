@@ -152,7 +152,7 @@ fightclub/
 
 ### 5.3 Stats
 - 4 contoare: `500+ Membri` · `12 Traineri` · `30+ Clase` · `10 Ani Experiență`
-- react-countup cu `enableScrollSpy: true`, `duration: 2.5`, `separator: "."`
+- react-countup cu `enableScrollSpy: true`, `duration: 2.5`, `separator: "."`, `suffix: "+"` (pentru Membri și Clase), fără suffix pentru Traineri și Ani
 - Layout: 4 coloane pe desktop, 2×2 pe mobil
 - Fiecare stat are icon Lucide deasupra (auriu)
 
@@ -205,7 +205,7 @@ fightclub/
   - EmailJS via `@emailjs/browser`
   - react-hot-toast: `"Mesaj trimis cu succes!"` (success) / `"Eroare la trimitere."` (error)
   - Validare: câmpuri required, email format
-- **Dreapta:** Google Maps embed `Strada Saturn 34, 800647 Galați` + info (adresă, telefon placeholder, email placeholder, orar)
+- **Dreapta:** Google Maps embed `Strada Saturn 34, 800647 Galați` + info bloc: adresă `Strada Saturn 34, Galați`, telefon `0236 000 000` (placeholder), email `contact@fightclubgalati.ro` (placeholder), orar `L-V: 06:00-22:00 · S-D: 08:00-20:00`
 - Layout: 2 coloane pe desktop, stacked pe mobil
 
 ### 5.10 Footer
@@ -221,8 +221,9 @@ fightclub/
 ### ClassesPage (`/clase`)
 - Hero mic cu titlu `"Clase & Programe"`
 - Filtre: `All · Începător · Intermediar · Avansat` (butons toggle)
+- Clasele cu `level: "Toate nivelele"` (ex: Spinning) apar în **toate** categoriile de filtrare
 - Grid cu toate 6 clasele, filtrat cu Motion `AnimatePresence layout`
-- State local `useState<string>` pentru filtrul activ
+- State local `useState<string>` pentru filtrul activ (`"All"` implicit)
 
 ### TrainersPage (`/traineri`)
 - Hero mic cu titlu `"Trainerii Noștri"`
