@@ -12,17 +12,20 @@ export default function SchedulePage() {
         />
       </Helmet>
 
-      <div className="pt-24 pb-20 bg-dark min-h-screen">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <h1 className="text-5xl font-black text-white mb-4">
-              Orar <span className="text-gold">Săptămânal</span>
-            </h1>
-            <p className="text-muted text-lg">
-              Toate clasele noastre, organizate pe zile și ore
-            </p>
-          </div>
+      <div className="pt-32 pb-12 bg-surface text-center">
+        <span className="text-gold text-sm font-bold uppercase tracking-widest">
+          Program
+        </span>
+        <h1 className="text-5xl font-black text-white mt-2 mb-4">
+          Orar <span className="text-gold">Săptămânal</span>
+        </h1>
+        <p className="text-muted text-lg">
+          Toate clasele noastre, organizate pe zile și ore
+        </p>
+      </div>
 
+      <div className="py-16 bg-dark">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <ScheduleGrid />
         </div>
       </div>

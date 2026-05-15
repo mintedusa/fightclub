@@ -3,13 +3,16 @@ import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import ScheduleGrid from '../ui/ScheduleGrid';
 
 export default function ScheduleSection() {
-  const ref = useScrollAnimation<HTMLElement>();
+  const titleRef = useScrollAnimation<HTMLDivElement>();
 
   return (
-    <section ref={ref} className="py-20 bg-surface">
+    <section className="py-20 bg-surface">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-black text-white mb-4">
+        <div ref={titleRef} className="text-center mb-12">
+          <span className="text-gold text-sm font-bold uppercase tracking-widest">
+            Program
+          </span>
+          <h2 className="text-4xl font-black text-white mt-2 mb-4">
             Orar <span className="text-gold">Clase</span>
           </h2>
           <p className="text-muted text-lg">
