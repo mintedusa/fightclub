@@ -20,23 +20,29 @@ export function useScrollAnimation<T extends HTMLElement = HTMLElement>(
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el,
-        { opacity: 0, y: options?.y ?? 40 },
-        {
-          opacity: 1,
-          y: 0,
+      const rect = el.getBoundingClientRect();
+      const alreadyInView = rect.top < window.innerHeight;
+
+      if (alreadyInView) {
+        gsap.fromTo(el, { opacity: 0, y: options?.y ?? 40 }, {
+          opacity: 1, y: 0,
+          duration: options?.duration ?? 0.6,
+          ease: 'power2.out',
+          delay: 0.1,
+        });
+      } else {
+        gsap.fromTo(el, { opacity: 0, y: options?.y ?? 40 }, {
+          opacity: 1, y: 0,
           duration: options?.duration ?? 0.8,
           ease: 'power2.out',
-          immediateRender: false,
           scrollTrigger: {
             trigger: el,
             start: options?.start ?? 'top 90%',
             once: true,
             invalidateOnRefresh: true,
           },
-        },
-      );
+        });
+      }
     }, el);
 
     return () => ctx.revert();
