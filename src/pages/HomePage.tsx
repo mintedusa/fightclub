@@ -2,6 +2,7 @@
 import HeroSection from '../components/sections/HeroSection';
 import StatsSection from '../components/sections/StatsSection';
 import ClassesSection from '../components/sections/ClassesSection';
+import TrainersSection from '../components/sections/TrainersSection';
 
 export default function HomePage() {
   return (
@@ -9,6 +10,7 @@ export default function HomePage() {
       <HeroSection />
       <StatsSection />
       <ClassesSection />
+      <TrainersSection />
     </>
   );
 }
