@@ -71,10 +71,8 @@ export default function ClassesPage() {
                 <motion.div
                   key={cls.id}
                   layout
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.25 }}
                 >
                   <ClassCard gymClass={cls} index={i} />
                 </motion.div>
