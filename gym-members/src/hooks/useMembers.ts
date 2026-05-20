@@ -26,14 +26,33 @@ export function useMember(id: string) {
   })
 }
 
+function generateTempPassword() {
+  const words = ['Gym', 'Club', 'Fight', 'Sport', 'Power']
+  const word = words[Math.floor(Math.random() * words.length)]
+  const num = Math.floor(1000 + Math.random() * 9000)
+  return `${word}${num}!`
+}
+
 export function useCreateMember() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: async (data: { email: string; full_name: string; phone?: string }) => {
-      const { error } = await supabase.auth.admin.inviteUserByEmail(data.email, {
-        data: { full_name: data.full_name },
+      const tempPassword = generateTempPassword()
+
+      const { error: signUpError } = await supabase.auth.signUp({
+        email: data.email,
+        password: tempPassword,
+        options: { data: { full_name: data.full_name } },
       })
-      if (error) throw error
+      if (signUpError) throw signUpError
+
+      await supabase.rpc('admin_confirm_user', { user_email: data.email })
+
+      if (data.phone) {
+        await supabase.from('profiles').update({ phone: data.phone }).eq('email', data.email)
+      }
+
+      return { tempPassword }
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ['members'] }),
   })

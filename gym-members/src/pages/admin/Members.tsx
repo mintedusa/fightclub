@@ -16,24 +16,31 @@ export function AdminMembers() {
 
   const [form, setForm] = useState({ email: '', full_name: '', phone: '' })
   const [formError, setFormError] = useState<string | null>(null)
+  const [created, setCreated] = useState<{ email: string; password: string } | null>(null)
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault()
     setFormError(null)
     try {
-      await createMember.mutateAsync(form)
-      setOpen(false)
+      const result = await createMember.mutateAsync(form)
+      setCreated({ email: form.email, password: result?.tempPassword ?? '' })
       setForm({ email: '', full_name: '', phone: '' })
     } catch (err: unknown) {
       setFormError(err instanceof Error ? err.message : 'Eroare la creare.')
     }
   }
 
+  function handleClose() {
+    setOpen(false)
+    setCreated(null)
+    setFormError(null)
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-white">Membri</h1>
-        <Button onClick={() => setOpen(true)}>
+        <Button onClick={() => { setOpen(true); setCreated(null) }}>
           <UserPlus className="h-4 w-4" /> Adaugă membru
         </Button>
       </div>
@@ -65,18 +72,33 @@ export function AdminMembers() {
         />
       )}
 
-      <Modal open={open} onClose={() => setOpen(false)} title="Adaugă membru nou">
-        <form onSubmit={handleCreate} className="space-y-4">
-          <Input label="Nume complet" value={form.full_name} onChange={e => setForm(f => ({ ...f, full_name: e.target.value }))} required />
-          <Input label="Email" type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} required />
-          <Input label="Telefon" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
-          {formError && <p className="text-sm text-red-400">{formError}</p>}
-          <p className="text-xs text-zinc-500">Membrul va primi un email cu link pentru setarea parolei.</p>
-          <div className="flex justify-end gap-3">
-            <Button variant="ghost" type="button" onClick={() => setOpen(false)}>Anulează</Button>
-            <Button type="submit" loading={createMember.isPending}>Trimite invitație</Button>
+      <Modal open={open} onClose={handleClose} title="Adaugă membru nou">
+        {created ? (
+          <div className="space-y-4">
+            <p className="text-green-400 text-sm font-medium">Cont creat cu succes!</p>
+            <div className="rounded-lg bg-zinc-800 p-4 space-y-2">
+              <p className="text-xs text-zinc-400">Email</p>
+              <p className="text-white font-mono">{created.email}</p>
+              <p className="text-xs text-zinc-400 mt-3">Parolă temporară</p>
+              <p className="text-red-400 font-mono text-lg font-bold tracking-wider">{created.password}</p>
+            </div>
+            <p className="text-xs text-zinc-500">Comunică aceste date membrului. El le poate schimba din portal după prima logare.</p>
+            <div className="flex justify-end">
+              <Button onClick={handleClose}>Închide</Button>
+            </div>
           </div>
-        </form>
+        ) : (
+          <form onSubmit={handleCreate} className="space-y-4">
+            <Input label="Nume complet" value={form.full_name} onChange={e => setForm(f => ({ ...f, full_name: e.target.value }))} required />
+            <Input label="Email" type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} required />
+            <Input label="Telefon" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
+            {formError && <p className="text-sm text-red-400">{formError}</p>}
+            <div className="flex justify-end gap-3">
+              <Button variant="ghost" type="button" onClick={handleClose}>Anulează</Button>
+              <Button type="submit" loading={createMember.isPending}>Trimite invitație</Button>
+            </div>
+          </form>
+        )}
       </Modal>
     </div>
   )
