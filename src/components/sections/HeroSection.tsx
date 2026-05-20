@@ -7,6 +7,7 @@ import TextPlugin from 'gsap/TextPlugin';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { ChevronDown } from 'lucide-react';
 import { useSmoothScroll } from '../../hooks/useSmoothScroll';
+import HeroCanvas from '../ui/HeroCanvas';
 
 // Tell TypeScript about GSAP TextPlugin's 'text' tween property
 declare module 'gsap' {
@@ -17,8 +18,7 @@ declare module 'gsap' {
 
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
-const FALLBACK_IMG =
-  'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80';
+const HERO_VIDEO = `${import.meta.env.BASE_URL}hero.mp4`;
 
 export default function HeroSection() {
   const { scrollTo } = useSmoothScroll();
@@ -29,9 +29,6 @@ export default function HeroSection() {
   const ctaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const heroVideoUrl = import.meta.env.VITE_HERO_VIDEO_URL as string | undefined;
-    void heroVideoUrl;
-
     const tl = gsap.timeline({ delay: 0.5 });
     tl.to(line1Ref.current, { duration: 1.2, text: 'Forjează-ți', ease: 'none' })
       .to(line2Ref.current, { duration: 1, text: 'Limitele', ease: 'none', delay: 0.2 })
@@ -65,32 +62,22 @@ export default function HeroSection() {
     };
   }, []);
 
-  const heroVideoUrl = import.meta.env.VITE_HERO_VIDEO_URL as string | undefined;
-
   return (
     <section
       id="hero"
       className="relative h-screen min-h-[600px] flex items-center overflow-hidden"
     >
       <div ref={bgRef} className="absolute inset-0 scale-110">
-        {heroVideoUrl ? (
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-            poster={FALLBACK_IMG}
-          >
-            <source src={heroVideoUrl} type="video/mp4" />
-          </video>
-        ) : (
-          <img
-            src={FALLBACK_IMG}
-            alt="FightClub Galați"
-            className="w-full h-full object-cover"
-          />
-        )}
+        <HeroCanvas />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src={HERO_VIDEO} type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-black/60" />
       </div>
 
@@ -104,7 +91,7 @@ export default function HeroSection() {
           ref={subtitleRef}
           className="text-white/80 text-lg sm:text-xl mb-8 max-w-xl opacity-0"
         >
-          Sala de fitness #1 din Galați — Box, CrossFit, Yoga, MMA și mai mult.
+          Sala de fitness #1 din Galați — Box, Power Step, Yoga, MMA și mai mult.
           Alătură-te celor 500+ membri care și-au transformat viața.
         </p>
 

@@ -20,13 +20,13 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-dark/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 ${
+        mobileOpen ? 'bg-dark' : scrolled ? 'bg-dark/90 backdrop-blur-md shadow-lg transition-all duration-300' : 'bg-transparent transition-all duration-300'
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-        <Link to="/" className="flex items-center">
-          <img src={logoUrl} alt="FightClub Galați" className="h-[72px] w-auto" />
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 h-36 flex items-center justify-between">
+        <Link to="/" className="flex items-center pt-3">
+          <img src={logoUrl} alt="FightClub Galați" className="h-[130px] w-auto" />
         </Link>
 
         <ul className="hidden md:flex items-center gap-8">
@@ -72,7 +72,7 @@ export default function Navbar() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'tween', duration: 0.3 }}
-            className="fixed inset-0 top-20 bg-dark z-40 flex flex-col p-8 gap-6"
+            className="fixed inset-0 top-36 bg-dark z-[60] flex flex-col p-8 gap-6"
           >
             {navItems.map((item) => (
               <NavLink

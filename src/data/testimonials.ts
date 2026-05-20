@@ -29,7 +29,7 @@ export const testimonials: Testimonial[] = [
     id: 't4',
     name: 'Raluca Ionescu',
     role: 'Membră de 6 luni',
-    text: 'Am început cu CrossFit fără nicio experiență. Bogdan m-a ghidat pas cu pas și acum fac exerciții pe care nu le credeam posibile. Rezultatele vorbesc de la sine.',
+    text: 'Am început cu Power Step fără nicio experiență. Bogdan m-a ghidat pas cu pas și acum fac exerciții pe care nu le credeam posibile. Rezultatele vorbesc de la sine.',
     rating: 5,
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80',
   },

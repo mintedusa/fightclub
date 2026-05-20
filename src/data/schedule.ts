@@ -5,10 +5,10 @@ export const scheduleEntries: ScheduleEntry[] = [
   { classId: 'box-thai', day: 'luni',   startTime: '18:00', endTime: '19:30' },
   { classId: 'box-thai', day: 'marti',  startTime: '18:00', endTime: '19:30' },
   { classId: 'box-thai', day: 'vineri', startTime: '18:00', endTime: '19:30' },
-  // CrossFit — M / J / S  07:00–08:30
-  { classId: 'crossfit', day: 'marti',   startTime: '07:00', endTime: '08:30' },
-  { classId: 'crossfit', day: 'joi',     startTime: '07:00', endTime: '08:30' },
-  { classId: 'crossfit', day: 'sambata', startTime: '07:00', endTime: '08:30' },
+  // Power Step — M / J / S  07:00–08:30
+  { classId: 'power-step', day: 'marti',   startTime: '07:00', endTime: '08:30' },
+  { classId: 'power-step', day: 'joi',     startTime: '07:00', endTime: '08:30' },
+  { classId: 'power-step', day: 'sambata', startTime: '07:00', endTime: '08:30' },
   // Yoga — M / V  10:00–11:00
   { classId: 'yoga', day: 'marti',  startTime: '10:00', endTime: '11:00' },
   { classId: 'yoga', day: 'vineri', startTime: '10:00', endTime: '11:00' },

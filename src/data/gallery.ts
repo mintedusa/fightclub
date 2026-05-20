@@ -12,7 +12,7 @@ export const galleryImages = [
   {
     id: 'g3',
     src: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=800&q=80',
-    alt: 'CrossFit training',
+    alt: 'Power Step training',
   },
   {
     id: 'g4',

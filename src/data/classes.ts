@@ -11,8 +11,8 @@ export const classes: GymClass[] = [
     category: 'Lupte',
   },
   {
-    id: 'crossfit',
-    title: 'CrossFit',
+    id: 'power-step',
+    title: 'Power Step',
     level: 'Avansat',
     schedule: 'M / J / S  07:00 - 08:30',
     image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80',

@@ -22,10 +22,10 @@ export const trainers: Trainer[] = [
   {
     id: 'bogdan-radu',
     name: 'Bogdan Radu',
-    specialty: 'CrossFit & Strength',
-    bio: 'CrossFit Level 2 Trainer cu expertiză în olimpic lifting și programare pentru forță maximă.',
+    specialty: 'Power Step & Strength',
+    bio: 'Power Step Level 2 Trainer cu expertiză în olimpic lifting și programare pentru forță maximă.',
     avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=400&q=80',
-    certifications: ['CrossFit L2', 'NSCA-CSCS', 'Olympic Weightlifting'],
+    certifications: ['Power Step L2', 'NSCA-CSCS', 'Olympic Weightlifting'],
     socials: { instagram: '#', facebook: '#' },
   },
   {
@@ -33,7 +33,7 @@ export const trainers: Trainer[] = [
     name: 'Elena Popa',
     specialty: 'Spinning & Cardio',
     bio: 'Instructor spinning certificat Schwinn cu 8 ani în industrie. Campioană la triatlon, pasionată de performanță cardio.',
-    avatar: 'https://images.unsplash.com/photo-1609899464926-b2e60b4c7b42?w=400&q=80',
+    avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&q=80',
     certifications: ['Schwinn Cycling', 'ACE Group Fitness', 'Triathlon Coach'],
     socials: { instagram: '#', facebook: '#' },
   },

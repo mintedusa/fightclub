@@ -33,7 +33,7 @@ const navLinks = [
   { label: 'Contact',  href: '/contact'  },
 ];
 
-const classLinks = ['Box Thai', 'CrossFit', 'Yoga', 'Spinning', 'MMA', 'Kickbox'];
+const classLinks = ['Box Thai', 'Power Step', 'Yoga', 'Spinning', 'MMA', 'Kickbox'];
 
 export default function Footer() {
   return (
@@ -42,7 +42,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           <div>
             <div className="mb-3">
-              <img src={logoUrl} alt="FightClub Galați" className="h-14 w-auto" />
+              <img src={logoUrl} alt="FightClub Galați" className="h-[95px] w-auto" />
             </div>
             <p className="text-muted text-sm leading-relaxed">
               Forjează-ți limitele la FightClub Galați. Sala de fitness #1 din Galați.
