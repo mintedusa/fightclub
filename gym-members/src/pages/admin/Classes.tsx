@@ -43,7 +43,7 @@ export function AdminClasses() {
       capacity: parseInt(form.capacity),
       location: form.location,
     }
-    if (editing) await updateClass.mutateAsync({ id: editing.id, ...data })
+    if (editing) await updateClass.mutateAsync({ id: editing.id, ...data, is_cancelled: editing.is_cancelled })
     else await createClass.mutateAsync(data)
     setOpen(false)
   }
