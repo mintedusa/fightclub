@@ -7,8 +7,6 @@ import TextPlugin from 'gsap/TextPlugin';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { ChevronDown } from 'lucide-react';
 import { useSmoothScroll } from '../../hooks/useSmoothScroll';
-import HeroCanvas from '../ui/HeroCanvas';
-
 // Tell TypeScript about GSAP TextPlugin's 'text' tween property
 declare module 'gsap' {
   interface TweenVars {
@@ -19,6 +17,7 @@ declare module 'gsap' {
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
 const HERO_VIDEO = `${import.meta.env.BASE_URL}hero.mp4`;
+const HERO_POSTER = `${import.meta.env.BASE_URL}hero-poster.jpg`;
 
 export default function HeroSection() {
   const { scrollTo } = useSmoothScroll();
@@ -68,12 +67,12 @@ export default function HeroSection() {
       className="relative h-screen min-h-[600px] flex items-center overflow-hidden"
     >
       <div ref={bgRef} className="absolute inset-0 scale-110">
-        <HeroCanvas />
         <video
           autoPlay
           muted
           loop
           playsInline
+          poster={HERO_POSTER}
           className="absolute inset-0 w-full h-full object-cover"
         >
           <source src={HERO_VIDEO} type="video/mp4" />
