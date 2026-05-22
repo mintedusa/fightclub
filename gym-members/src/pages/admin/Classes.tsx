@@ -51,7 +51,7 @@ export function AdminClasses() {
   const rows = rawClasses ? groupClassesBySeries(rawClasses) : []
 
   function openCreate() {
-    setForm({ name: '', instructor: trainers?.[0]?.full_name ?? '', datetime: '', capacity: '', location: 'Sala 1' })
+    setForm({ name: '', instructor: '', datetime: '', capacity: '', location: 'Sala 1' })
     setRecurrence(EMPTY_RECURRENCE)
     setFormError(null)
     setModalMode('create')
@@ -92,54 +92,66 @@ export function AdminClasses() {
       capacity: parseInt(form.capacity),
       location: form.location,
     }
-    if (recurrence.enabled) {
-      const groupId = crypto.randomUUID()
-      const occurrences = generateOccurrences(form.datetime, recurrence.days, recurrence.endDate, {
-        ...base,
-        recurrence_group_id: groupId,
-      })
-      if (occurrences.length === 0) {
-        setFormError('Nicio apariție în intervalul selectat. Verifică zilele și data de final.')
-        return
+    try {
+      if (recurrence.enabled) {
+        const groupId = crypto.randomUUID()
+        const occurrences = generateOccurrences(form.datetime, recurrence.days, recurrence.endDate, {
+          ...base,
+          recurrence_group_id: groupId,
+        })
+        if (occurrences.length === 0) {
+          setFormError('Nicio apariție în intervalul selectat. Verifică zilele și data de final.')
+          return
+        }
+        setFormError(null)
+        await createClasses.mutateAsync(occurrences)
+      } else {
+        await createClass.mutateAsync({ ...base, datetime: new Date(form.datetime).toISOString() })
       }
-      setFormError(null)
-      await createClasses.mutateAsync(occurrences)
-    } else {
-      await createClass.mutateAsync({ ...base, datetime: new Date(form.datetime).toISOString() })
+      setModalMode('none')
+    } catch (err) {
+      setFormError(err instanceof Error ? err.message : 'Eroare la salvare.')
     }
-    setModalMode('none')
   }
 
   async function handleSaveIndividual(e: React.FormEvent) {
     e.preventDefault()
     if (!editingIndividual) return
-    await updateClass.mutateAsync({
-      id: editingIndividual.id,
-      name: form.name,
-      instructor: form.instructor,
-      capacity: parseInt(form.capacity),
-      location: form.location,
-      datetime: new Date(form.datetime).toISOString(),
-      is_cancelled: editingIndividual.is_cancelled,
-    })
-    setModalMode('none')
+    try {
+      await updateClass.mutateAsync({
+        id: editingIndividual.id,
+        name: form.name,
+        instructor: form.instructor,
+        capacity: parseInt(form.capacity),
+        location: form.location,
+        datetime: new Date(form.datetime).toISOString(),
+        is_cancelled: editingIndividual.is_cancelled,
+      })
+      setModalMode('none')
+    } catch (err) {
+      setFormError(err instanceof Error ? err.message : 'Eroare la salvare.')
+    }
   }
 
   async function handleSaveSeries(e: React.FormEvent) {
     e.preventDefault()
     if (!editingSeries?.recurrence_group_id) return
-    await updateSeries.mutateAsync({
-      recurrenceGroupId: editingSeries.recurrence_group_id,
-      updates: {
-        name: seriesForm.name,
-        instructor: seriesForm.instructor,
-        time: seriesForm.time,
-        capacity: parseInt(seriesForm.capacity),
-        location: seriesForm.location,
-        ...(seriesForm.cancelAll ? { is_cancelled: true } : {}),
-      },
-    })
-    setModalMode('none')
+    try {
+      await updateSeries.mutateAsync({
+        recurrenceGroupId: editingSeries.recurrence_group_id,
+        updates: {
+          name: seriesForm.name,
+          instructor: seriesForm.instructor,
+          time: seriesForm.time,
+          capacity: parseInt(seriesForm.capacity),
+          location: seriesForm.location,
+          ...(seriesForm.cancelAll ? { is_cancelled: true } : {}),
+        },
+      })
+      setModalMode('none')
+    } catch (err) {
+      setFormError(err instanceof Error ? err.message : 'Eroare la salvare.')
+    }
   }
 
   const isSaving =
@@ -288,6 +300,7 @@ export function AdminClasses() {
               Marchează ca anulată
             </label>
           )}
+          {formError && <p className="text-sm text-red-400">{formError}</p>}
           <div className="flex justify-end gap-3">
             <Button variant="ghost" type="button" onClick={() => setModalMode('none')}>Anulează</Button>
             <Button type="submit" loading={isSaving}>Salvează</Button>
@@ -325,6 +338,7 @@ export function AdminClasses() {
             />
             Anulează toată seria
           </label>
+          {formError && <p className="text-sm text-red-400">{formError}</p>}
           <div className="flex justify-end gap-3">
             <Button variant="ghost" type="button" onClick={() => setModalMode('none')}>Anulează</Button>
             <Button type="submit" loading={isSaving}>Salvează</Button>
