@@ -38,6 +38,15 @@ export function useCreateCheckIn() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: async ({ member_id, checked_in_by }: { member_id: string; checked_in_by: string }) => {
+      // Server-side guard: verify active subscription before inserting check-in
+      const { data: sub, error: subError } = await supabase
+        .from('subscriptions')
+        .select('id, status')
+        .eq('member_id', member_id)
+        .eq('status', 'active')
+        .maybeSingle()
+      if (subError) throw subError
+      if (!sub) throw new Error('Membrul nu are abonament activ.')
       const { error } = await supabase.from('checkins').insert({ member_id, checked_in_by })
       if (error) throw error
     },

@@ -10,6 +10,12 @@ import { useAuthContext } from '../../contexts/AuthContext'
 import { getDaysRemaining, getSubscriptionStatusColor } from '../../lib/utils'
 import type { Profile } from '../../types'
 
+type CheckInWithMember = {
+  id: string
+  checked_in_at: string
+  member: { full_name: string; email: string } | null
+}
+
 function MemberCheckInCard({ member, adminId }: { member: Profile; adminId: string }) {
   const { data: sub } = useMemberSubscription(member.id)
   const checkIn = useCreateCheckIn()
@@ -83,7 +89,7 @@ export function AdminCheckIn() {
       <div>
         <h2 className="text-lg font-semibold text-white mb-4">Check-in-uri azi ({todayCheckIns?.length ?? 0})</h2>
         <div className="space-y-2">
-          {(todayCheckIns as any[])?.map((c: any) => (
+          {(todayCheckIns as unknown as CheckInWithMember[])?.map(c => (
             <div key={c.id} className="flex items-center justify-between px-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg text-sm">
               <span className="text-white font-medium">{c.member?.full_name}</span>
               <span className="text-zinc-400">{new Date(c.checked_in_at).toLocaleTimeString('ro-RO', { hour: '2-digit', minute: '2-digit' })}</span>

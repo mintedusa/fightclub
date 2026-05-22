@@ -26,7 +26,7 @@ export function useAuth(): AuthState {
       .single()
     if (currentUserId.current !== userId) return
     if (error) {
-      console.error('Failed to fetch profile:', error.message)
+      if (import.meta.env.DEV) console.error('Failed to fetch profile:', error.message)
       return
     }
     setProfile(data as Profile)

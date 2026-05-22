@@ -15,8 +15,8 @@ export function ChangePasswordForm() {
       setErrorMsg('Parolele nu coincid.')
       return
     }
-    if (form.password.length < 6) {
-      setErrorMsg('Parola trebuie să aibă minim 6 caractere.')
+    if (form.password.length < 8) {
+      setErrorMsg('Parola trebuie să aibă minim 8 caractere.')
       return
     }
     setStatus('saving')
@@ -42,7 +42,7 @@ export function ChangePasswordForm() {
           value={form.password}
           onChange={e => setForm(f => ({ ...f, password: e.target.value }))}
           required
-          minLength={6}
+          minLength={8}
         />
         <Input
           label="Confirmă parola"

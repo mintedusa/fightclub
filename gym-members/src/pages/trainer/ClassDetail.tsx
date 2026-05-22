@@ -3,7 +3,7 @@ import { ArrowLeft } from 'lucide-react'
 import { Button } from '../../components/ui/Button'
 import { Badge } from '../../components/ui/Badge'
 import { Table } from '../../components/ui/Table'
-import { useClassBookings } from '../../hooks/useClasses'
+import { useClassBookings, useTrainerClasses } from '../../hooks/useClasses'
 
 type BookingWithMember = {
   id: string
@@ -20,8 +20,22 @@ type BookingWithMember = {
 export function TrainerClassDetail() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
+  const { data: trainerClasses } = useTrainerClasses()
+  const ownsClass = trainerClasses?.some(c => c.id === id)
   const { data: rawBookings, isLoading } = useClassBookings(id!)
   const bookings = rawBookings as unknown as BookingWithMember[] | undefined
+
+  // Redirect if trainer doesn't own this class (once classes have loaded)
+  if (trainerClasses && !ownsClass) {
+    return (
+      <div className="space-y-4">
+        <Button variant="ghost" size="sm" onClick={() => navigate('/trainer/classes')}>
+          <ArrowLeft className="h-4 w-4" /> Înapoi
+        </Button>
+        <p className="text-red-400 text-sm">Clasă negăsită sau nu ești instructorul acestei clase.</p>
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-6">

@@ -8,7 +8,11 @@ export function useMembers(search?: string, role?: 'member' | 'trainer') {
     queryFn: async () => {
       let q = supabase.from('profiles').select('*').neq('role', 'admin').order('full_name')
       if (role) q = q.eq('role', role)
-      if (search) q = q.or(`full_name.ilike.%${search}%,email.ilike.%${search}%`)
+      if (search) {
+        // Strip characters that have meaning in PostgREST filter syntax before interpolation
+        const safe = search.replace(/[(),"]/g, '').slice(0, 100)
+        if (safe) q = q.or(`full_name.ilike.%${safe}%,email.ilike.%${safe}%`)
+      }
       const { data, error } = await q
       if (error) throw error
       return data as Profile[]
@@ -56,7 +60,10 @@ export function useUpdateMember() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: async ({ id, ...updates }: Partial<Profile> & { id: string }) => {
-      const { error } = await supabase.from('profiles').update(updates).eq('id', id)
+      // Strip role from client-side updates — role changes must go through admin RPC or direct DB
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { role: _role, ...safeUpdates } = updates as Partial<Profile>
+      const { error } = await supabase.from('profiles').update(safeUpdates).eq('id', id)
       if (error) throw error
     },
     onSuccess: (_d, { id }) => {
