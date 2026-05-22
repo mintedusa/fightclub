@@ -64,7 +64,11 @@
       "Bash(PGPASSWORD=r7marE3zq8CelgB5 /usr/local/opt/libpq/bin/psql \"postgresql://postgres.binttgkpdskzsdyfifnh@aws-0-eu-west-1.pooler.supabase.com:5432/postgres\" -c \"DELETE FROM auth.users WHERE email = 'test.new.member@yahoo.com'; DELETE FROM public.profiles WHERE email = 'test.new.member@yahoo.com'; SELECT 'cleanup done' as status;\")",
       "Bash(git push *)",
       "Bash(PGPASSWORD=r7marE3zq8CelgB5 /usr/local/opt/libpq/bin/psql \"postgresql://postgres.binttgkpdskzsdyfifnh@aws-0-eu-west-1.pooler.supabase.com:5432/postgres\" -c \"SELECT conname, pg_get_constraintdef\\(oid\\) FROM pg_constraint WHERE conname = 'profiles_role_check';\" -c \"SELECT policyname FROM pg_policies WHERE tablename IN \\('classes','bookings'\\) AND policyname LIKE '%trainer%';\")",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(PGPASSWORD=r7marE3zq8CelgB5 /usr/local/opt/libpq/bin/psql \"postgresql://postgres.binttgkpdskzsdyfifnh@aws-0-eu-west-1.pooler.supabase.com:5432/postgres\" -c \"SELECT pg_get_constraintdef\\(oid\\) FROM pg_constraint WHERE conname = 'profiles_role_check';\")",
+      "Bash(PGPASSWORD=r7marE3zq8CelgB5 /usr/local/opt/libpq/bin/psql \"postgresql://postgres.binttgkpdskzsdyfifnh@aws-0-eu-west-1.pooler.supabase.com:5432/postgres\" -c \"SELECT policyname, cmd, qual FROM pg_policies WHERE policyname IN \\('classes_trainer_insert','classes_trainer_update','bookings_trainer_select'\\);\")",
+      "Bash(PGPASSWORD=r7marE3zq8CelgB5 /usr/local/opt/libpq/bin/psql \"postgresql://postgres.binttgkpdskzsdyfifnh@aws-0-eu-west-1.pooler.supabase.com:5432/postgres\" -c \"SELECT policyname, cmd, qual, with_check FROM pg_policies WHERE tablename IN \\('classes','bookings'\\) ORDER BY tablename, policyname;\")",
+      "Bash(PGPASSWORD=r7marE3zq8CelgB5 /usr/local/opt/libpq/bin/psql \"postgresql://postgres.binttgkpdskzsdyfifnh@aws-0-eu-west-1.pooler.supabase.com:5432/postgres\" -c \"SELECT policyname, cmd, qual, with_check FROM pg_policies WHERE policyname IN \\('classes_trainer_insert','classes_trainer_update'\\);\")"
     ],
     "additionalDirectories": [
       "/tmp",
