@@ -2,11 +2,12 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { supabase } from '../lib/supabase'
 import type { Profile } from '../types'
 
-export function useMembers(search?: string) {
+export function useMembers(search?: string, role?: 'member' | 'trainer') {
   return useQuery({
-    queryKey: ['members', search],
+    queryKey: ['members', search, role],
     queryFn: async () => {
       let q = supabase.from('profiles').select('*').neq('role', 'admin').order('full_name')
+      if (role) q = q.eq('role', role)
       if (search) q = q.or(`full_name.ilike.%${search}%,email.ilike.%${search}%`)
       const { data, error } = await q
       if (error) throw error

@@ -7,16 +7,26 @@ import { Modal } from '../../components/ui/Modal'
 import { Table } from '../../components/ui/Table'
 import { useMembers, useCreateMember } from '../../hooks/useMembers'
 
+type Tab = 'members' | 'trainers'
+
 export function AdminMembers() {
   const navigate = useNavigate()
+  const [tab, setTab] = useState<Tab>('members')
   const [search, setSearch] = useState('')
   const [open, setOpen] = useState(false)
-  const { data: members, isLoading } = useMembers(search)
+  const { data: people, isLoading } = useMembers(search, tab === 'members' ? 'member' : 'trainer')
   const createMember = useCreateMember()
 
   const [form, setForm] = useState({ email: '', full_name: '', phone: '', password: '', role: 'member' as 'member' | 'trainer' })
   const [formError, setFormError] = useState<string | null>(null)
   const [created, setCreated] = useState<{ email: string; role: string } | null>(null)
+
+  function openAdd() {
+    setForm({ email: '', full_name: '', phone: '', password: '', role: tab === 'members' ? 'member' : 'trainer' })
+    setCreated(null)
+    setFormError(null)
+    setOpen(true)
+  }
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault()
@@ -24,7 +34,7 @@ export function AdminMembers() {
     try {
       await createMember.mutateAsync(form)
       setCreated({ email: form.email, role: form.role })
-      setForm({ email: '', full_name: '', phone: '', password: '', role: 'member' })
+      setForm({ email: '', full_name: '', phone: '', password: '', role: tab === 'members' ? 'member' : 'trainer' })
     } catch (err: unknown) {
       setFormError(err instanceof Error ? err.message : 'Eroare la creare.')
     }
@@ -34,16 +44,35 @@ export function AdminMembers() {
     setOpen(false)
     setCreated(null)
     setFormError(null)
-    setForm({ email: '', full_name: '', phone: '', password: '', role: 'member' })
+    setForm({ email: '', full_name: '', phone: '', password: '', role: tab === 'members' ? 'member' : 'trainer' })
   }
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-white">Membri</h1>
-        <Button onClick={() => { setOpen(true); setCreated(null) }}>
-          <UserPlus className="h-4 w-4" /> Adaugă membru
+        <h1 className="text-2xl font-bold text-white">
+          {tab === 'members' ? 'Membri' : 'Traineri'}
+        </h1>
+        <Button onClick={openAdd}>
+          <UserPlus className="h-4 w-4" />
+          {tab === 'members' ? 'Adaugă membru' : 'Adaugă trainer'}
         </Button>
+      </div>
+
+      {/* Tabs */}
+      <div className="flex gap-1 border-b border-zinc-700">
+        <button
+          className={`px-4 py-2 text-sm font-medium transition-colors ${tab === 'members' ? 'text-white border-b-2 border-red-500' : 'text-zinc-400 hover:text-zinc-200'}`}
+          onClick={() => { setTab('members'); setSearch('') }}
+        >
+          Membri
+        </button>
+        <button
+          className={`px-4 py-2 text-sm font-medium transition-colors ${tab === 'trainers' ? 'text-white border-b-2 border-red-500' : 'text-zinc-400 hover:text-zinc-200'}`}
+          onClick={() => { setTab('trainers'); setSearch('') }}
+        >
+          Traineri
+        </button>
       </div>
 
       <Input
@@ -56,8 +85,8 @@ export function AdminMembers() {
         <p className="text-zinc-500 text-sm">Se încarcă...</p>
       ) : (
         <Table
-          data={members ?? []}
-          emptyMessage="Niciun membru găsit."
+          data={people ?? []}
+          emptyMessage={tab === 'members' ? 'Niciun membru găsit.' : 'Niciun trainer găsit.'}
           columns={[
             { key: 'name', header: 'Nume', render: m => <span className="font-medium">{m.full_name}</span> },
             { key: 'email', header: 'Email', render: m => <span className="text-zinc-400">{m.email}</span> },
@@ -73,7 +102,7 @@ export function AdminMembers() {
         />
       )}
 
-      <Modal open={open} onClose={handleClose} title="Adaugă membru nou">
+      <Modal open={open} onClose={handleClose} title={tab === 'members' ? 'Adaugă membru nou' : 'Adaugă trainer nou'}>
         {created ? (
           <div className="space-y-4">
             <p className="text-green-400 text-sm font-medium">
@@ -92,17 +121,6 @@ export function AdminMembers() {
             <Input label="Nume complet" value={form.full_name} onChange={e => setForm(f => ({ ...f, full_name: e.target.value }))} required />
             <Input label="Email" type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} required />
             <Input label="Telefon" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
-            <div>
-              <label className="block text-sm font-medium text-zinc-300 mb-1.5">Rol</label>
-              <select
-                value={form.role}
-                onChange={e => setForm(f => ({ ...f, role: e.target.value as 'member' | 'trainer' }))}
-                className="w-full rounded-lg bg-zinc-800 border border-zinc-700 text-white px-3 py-2 text-sm focus:outline-none focus:border-red-500"
-              >
-                <option value="member">Membru</option>
-                <option value="trainer">Trainer</option>
-              </select>
-            </div>
             <Input label="Parolă" type="password" value={form.password} onChange={e => setForm(f => ({ ...f, password: e.target.value }))} required minLength={6} />
             {formError && <p className="text-sm text-red-400">{formError}</p>}
             <div className="flex justify-end gap-3">
