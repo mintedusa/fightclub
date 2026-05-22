@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuthContext } from '../../contexts/AuthContext'
 import { useUpdateMember } from '../../hooks/useMembers'
 import { Card } from '../../components/ui/Card'
@@ -11,6 +11,12 @@ export function PortalProfile() {
   const updateMember = useUpdateMember()
   const [form, setForm] = useState({ full_name: profile?.full_name ?? '', phone: profile?.phone ?? '' })
   const [saved, setSaved] = useState(false)
+
+  useEffect(() => {
+    if (profile) {
+      setForm({ full_name: profile.full_name ?? '', phone: profile.phone ?? '' })
+    }
+  }, [profile])
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault()
