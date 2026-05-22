@@ -25,11 +25,13 @@ export function TrainerClasses() {
   const [editing, setEditing] = useState<Class | null>(null)
   const [form, setForm] = useState({ name: '', datetime: '', capacity: '', location: 'Sala 1' })
   const [recurrence, setRecurrence] = useState<RecurrenceState>(EMPTY_RECURRENCE)
+  const [formError, setFormError] = useState<string | null>(null)
 
   function openCreate() {
     setEditing(null)
     setForm({ name: '', datetime: '', capacity: '', location: 'Sala 1' })
     setRecurrence(EMPTY_RECURRENCE)
+    setFormError(null)
     setOpen(true)
   }
 
@@ -62,6 +64,11 @@ export function TrainerClasses() {
       })
     } else if (recurrence.enabled) {
       const occurrences = generateOccurrences(form.datetime, recurrence.days, recurrence.endDate, base)
+      if (occurrences.length === 0) {
+        setFormError('Nicio apariție în intervalul selectat. Verifică zilele și data de final.')
+        return
+      }
+      setFormError(null)
       await createClasses.mutateAsync(occurrences)
     } else {
       await createClass.mutateAsync({ ...base, datetime: new Date(form.datetime).toISOString() })
@@ -122,6 +129,7 @@ export function TrainerClasses() {
               startDate={form.datetime.slice(0, 10)}
             />
           )}
+          {formError && <p className="text-sm text-red-400">{formError}</p>}
           <div className="flex justify-end gap-3">
             <Button variant="ghost" type="button" onClick={() => setOpen(false)}>Anulează</Button>
             <Button type="submit" loading={isSaving} disabled={recurrenceInvalid}>Salvează</Button>
