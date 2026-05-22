@@ -59,3 +59,39 @@ export function useUpdateClass() {
     onSuccess: () => qc.invalidateQueries({ queryKey: ['classes'] }),
   })
 }
+
+export function useTrainerClasses() {
+  return useQuery({
+    queryKey: ['trainer-classes'],
+    queryFn: async () => {
+      const { data: profile } = await supabase.from('profiles').select('full_name').single()
+      if (!profile) return []
+      const { data, error } = await supabase
+        .from('classes')
+        .select('*, bookings_count:bookings(count)')
+        .eq('instructor', profile.full_name)
+        .order('datetime', { ascending: false })
+      if (error) throw error
+      return (data ?? []).map(c => ({
+        ...c,
+        bookings_count: (c.bookings_count as unknown as { count: number }[])[0]?.count ?? 0,
+      })) as Class[]
+    },
+  })
+}
+
+export function useClassBookings(classId: string) {
+  return useQuery({
+    queryKey: ['class-bookings', classId],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('bookings')
+        .select('*, member:profiles(full_name, email, phone)')
+        .eq('class_id', classId)
+        .neq('status', 'cancelled')
+        .order('created_at')
+      if (error) throw error
+      return data
+    },
+  })
+}
