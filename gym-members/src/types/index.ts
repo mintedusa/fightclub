@@ -42,6 +42,16 @@ export interface Class {
   location: string
   is_cancelled: boolean
   bookings_count?: number
+  recurrence_group_id?: string | null
+}
+
+export interface ClassRow extends Class {
+  isSeries: true
+  seriesDays: number[]        // unique weekday indices across all instances
+  seriesStart: string         // earliest datetime ISO string
+  seriesEnd: string           // latest datetime ISO string
+  instanceCount: number
+  instances: Class[]
 }
 
 export interface Booking {

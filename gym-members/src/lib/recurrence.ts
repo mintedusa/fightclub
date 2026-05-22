@@ -1,4 +1,4 @@
-import type { Class } from '../types'
+import type { Class, ClassRow } from '../types'
 
 export interface RecurrenceState {
   enabled: boolean
@@ -12,7 +12,7 @@ export function generateOccurrences(
   startDatetime: string,
   days: number[],
   endDate: string,
-  base: Omit<ClassInput, 'datetime'>
+  base: Omit<ClassInput, 'datetime'> & { recurrence_group_id: string }
 ): ClassInput[] {
   const result: ClassInput[] = []
   const start = new Date(startDatetime)
@@ -35,4 +35,43 @@ export function generateOccurrences(
   }
 
   return result
+}
+
+export function groupClassesBySeries(classes: Class[]): (Class | ClassRow)[] {
+  const seriesMap = new Map<string, Class[]>()
+  const individual: Class[] = []
+
+  for (const cls of classes) {
+    if (cls.recurrence_group_id) {
+      const existing = seriesMap.get(cls.recurrence_group_id) ?? []
+      existing.push(cls)
+      seriesMap.set(cls.recurrence_group_id, existing)
+    } else {
+      individual.push(cls)
+    }
+  }
+
+  const seriesRows: ClassRow[] = []
+  for (const [, instances] of seriesMap) {
+    const sorted = [...instances].sort(
+      (a, b) => new Date(a.datetime).getTime() - new Date(b.datetime).getTime()
+    )
+    const now = new Date()
+    const representative =
+      sorted.find(c => new Date(c.datetime) >= now) ?? sorted[sorted.length - 1]
+
+    const seriesDays = [...new Set(sorted.map(c => new Date(c.datetime).getDay()))]
+
+    seriesRows.push({
+      ...representative,
+      isSeries: true,
+      seriesDays,
+      seriesStart: sorted[0].datetime,
+      seriesEnd: sorted[sorted.length - 1].datetime,
+      instanceCount: sorted.length,
+      instances: sorted,
+    })
+  }
+
+  return [...seriesRows, ...individual]
 }
