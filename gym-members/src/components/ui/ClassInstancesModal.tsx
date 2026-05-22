@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Modal } from './Modal'
 import { Badge } from './Badge'
 import { Button } from './Button'
@@ -13,9 +14,15 @@ interface Props {
 export function ClassInstancesModal({ series, onClose }: Props) {
   const { data: instances, isLoading } = useSeriesInstances(series?.recurrence_group_id)
   const updateClass = useUpdateClass()
+  const [cancelling, setCancelling] = useState<Set<string>>(new Set())
 
   async function handleCancel(id: string) {
-    await updateClass.mutateAsync({ id, is_cancelled: true })
+    setCancelling(prev => new Set([...prev, id]))
+    try {
+      await updateClass.mutateAsync({ id, is_cancelled: true })
+    } finally {
+      setCancelling(prev => { const next = new Set(prev); next.delete(id); return next })
+    }
   }
 
   return (
@@ -38,7 +45,7 @@ export function ClassInstancesModal({ series, onClose }: Props) {
                   <Button
                     variant="ghost"
                     size="sm"
-                    loading={updateClass.isPending}
+                    loading={cancelling.has(inst.id)}
                     onClick={() => handleCancel(inst.id)}
                   >
                     Anulează
