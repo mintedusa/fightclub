@@ -171,15 +171,20 @@ export function useUpdateClassSeries() {
         const h = parseInt(hStr, 10)
         const m = parseInt(mStr, 10)
 
-        for (const inst of data ?? []) {
-          const dt = new Date(inst.datetime)
-          dt.setHours(h, m, 0, 0)
-          const { error: updateError } = await supabase
-            .from('classes')
-            .update({ ...getCommonUpdates(updates), datetime: dt.toISOString() })
-            .eq('id', inst.id)
-          if (updateError) throw updateError
-        }
+        const errors = await Promise.all(
+          (data ?? []).map(async inst => {
+            const dt = new Date(inst.datetime)
+            // setHours uses local timezone — consistent with form input (toLocaleTimeString ro-RO)
+            dt.setHours(h, m, 0, 0)
+            const { error: updateError } = await supabase
+              .from('classes')
+              .update({ ...getCommonUpdates(updates), datetime: dt.toISOString() })
+              .eq('id', inst.id)
+            return updateError
+          })
+        )
+        const firstError = errors.find(Boolean)
+        if (firstError) throw firstError
       } else {
         const { error } = await supabase
           .from('classes')
