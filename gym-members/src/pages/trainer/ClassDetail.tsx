@@ -5,10 +5,23 @@ import { Badge } from '../../components/ui/Badge'
 import { Table } from '../../components/ui/Table'
 import { useClassBookings } from '../../hooks/useClasses'
 
+type BookingWithMember = {
+  id: string
+  status: string
+  class_id: string
+  created_at: string
+  member: {
+    full_name: string
+    email: string
+    phone: string | null
+  } | null
+}
+
 export function TrainerClassDetail() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
-  const { data: bookings, isLoading } = useClassBookings(id!)
+  const { data: rawBookings, isLoading } = useClassBookings(id!)
+  const bookings = rawBookings as unknown as BookingWithMember[] | undefined
 
   return (
     <div className="space-y-6">
@@ -26,15 +39,10 @@ export function TrainerClassDetail() {
           data={bookings ?? []}
           emptyMessage="Niciun membru înscris."
           columns={[
-            { key: 'name', header: 'Nume', render: b => <span className="font-medium">{(b.member as any)?.full_name}</span> },
-            { key: 'email', header: 'Email', render: b => <span className="text-zinc-400">{(b.member as any)?.email}</span> },
-            { key: 'phone', header: 'Telefon', render: b => (b.member as any)?.phone ?? '—' },
-            {
-              key: 'status', header: 'Status', render: b =>
-                b.status === 'attended'
-                  ? <Badge color="green">Prezent</Badge>
-                  : <Badge color="red">Înscris</Badge>
-            },
+            { key: 'name', header: 'Nume', render: b => <span className="font-medium">{b.member?.full_name}</span> },
+            { key: 'email', header: 'Email', render: b => <span className="text-zinc-400">{b.member?.email}</span> },
+            { key: 'phone', header: 'Telefon', render: b => b.member?.phone ?? '—' },
+            { key: 'status', header: 'Status', render: b => b.status === 'attended' ? <Badge color="green">Prezent</Badge> : <Badge color="red">Înscris</Badge> },
           ]}
         />
       )}

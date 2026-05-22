@@ -45,7 +45,11 @@ export function useCreateClass() {
       const { error } = await supabase.from('classes').insert({ ...data, is_cancelled: false })
       if (error) throw error
     },
-    onSuccess: () => qc.invalidateQueries({ queryKey: ['classes'] }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['classes'] })
+      qc.invalidateQueries({ queryKey: ['trainer-classes'] })
+      qc.invalidateQueries({ queryKey: ['trainer-stats'] })
+    },
   })
 }
 
@@ -56,7 +60,11 @@ export function useUpdateClass() {
       const { error } = await supabase.from('classes').update(updates).eq('id', id)
       if (error) throw error
     },
-    onSuccess: () => qc.invalidateQueries({ queryKey: ['classes'] }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['classes'] })
+      qc.invalidateQueries({ queryKey: ['trainer-classes'] })
+      qc.invalidateQueries({ queryKey: ['trainer-stats'] })
+    },
   })
 }
 
@@ -64,7 +72,9 @@ export function useTrainerClasses() {
   return useQuery({
     queryKey: ['trainer-classes'],
     queryFn: async () => {
-      const { data: profile } = await supabase.from('profiles').select('full_name').single()
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return []
+      const { data: profile } = await supabase.from('profiles').select('full_name').eq('id', user.id).single()
       if (!profile) return []
       const { data, error } = await supabase
         .from('classes')

@@ -39,13 +39,12 @@ export function useCreateMember() {
 
       await supabase.rpc('admin_confirm_user', { user_email: data.email })
 
-      if (data.role === 'trainer') {
-        const { error: roleError } = await supabase.from('profiles').update({ role: 'trainer' }).eq('email', data.email)
-        if (roleError) throw roleError
-      }
-      if (data.phone) {
-        const { error: phoneError } = await supabase.from('profiles').update({ phone: data.phone }).eq('email', data.email)
-        if (phoneError) throw phoneError
+      const profileUpdate: Record<string, unknown> = {}
+      if (data.role === 'trainer') profileUpdate.role = 'trainer'
+      if (data.phone) profileUpdate.phone = data.phone
+      if (Object.keys(profileUpdate).length > 0) {
+        const { error: updateError } = await supabase.from('profiles').update(profileUpdate).eq('email', data.email)
+        if (updateError) throw updateError
       }
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ['members'] }),

@@ -5,9 +5,12 @@ export function useTrainerStats() {
   return useQuery({
     queryKey: ['trainer-stats'],
     queryFn: async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return { totalClasses: 0, upcomingClasses: 0, totalEnrolled: 0 }
       const { data: profile } = await supabase
         .from('profiles')
         .select('full_name')
+        .eq('id', user.id)
         .single()
 
       if (!profile) return { totalClasses: 0, upcomingClasses: 0, totalEnrolled: 0 }

@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/portal',
-    element: <ProtectedRoute><PortalLayout /></ProtectedRoute>,
+    element: <ProtectedRoute requiredRole="member"><PortalLayout /></ProtectedRoute>,
     children: [
       { index: true, element: <PortalDashboard /> },
       { path: 'subscription', element: <PortalMySubscription /> },
