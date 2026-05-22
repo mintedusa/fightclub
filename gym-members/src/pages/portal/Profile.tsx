@@ -4,6 +4,7 @@ import { useUpdateMember } from '../../hooks/useMembers'
 import { Card } from '../../components/ui/Card'
 import { Input } from '../../components/ui/Input'
 import { Button } from '../../components/ui/Button'
+import { ChangePasswordForm } from '../../components/ui/ChangePasswordForm'
 
 export function PortalProfile() {
   const { profile } = useAuthContext()
@@ -31,6 +32,7 @@ export function PortalProfile() {
           <Button type="submit" loading={updateMember.isPending}>Salvează modificările</Button>
         </form>
       </Card>
+      <ChangePasswordForm />
     </div>
   )
 }
