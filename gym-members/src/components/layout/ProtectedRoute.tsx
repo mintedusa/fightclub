@@ -20,7 +20,8 @@ export function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) 
 
   if (!session) return <Navigate to="/" replace />
   if (requiredRole && profile?.role !== requiredRole) {
-    return <Navigate to={profile?.role === 'admin' ? '/admin' : '/portal'} replace />
+    const home = profile?.role === 'admin' ? '/admin' : profile?.role === 'trainer' ? '/trainer' : '/portal'
+    return <Navigate to={home} replace />
   }
 
   return <>{children}</>

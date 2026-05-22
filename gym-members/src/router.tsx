@@ -2,6 +2,11 @@ import { createBrowserRouter } from 'react-router-dom'
 import { ProtectedRoute } from './components/layout/ProtectedRoute'
 import { AdminLayout } from './components/layout/AdminLayout'
 import { PortalLayout } from './components/layout/PortalLayout'
+import { TrainerLayout } from './components/layout/TrainerLayout'
+import { TrainerDashboard } from './pages/trainer/Dashboard'
+import { TrainerClasses } from './pages/trainer/Classes'
+import { TrainerClassDetail } from './pages/trainer/ClassDetail'
+import { TrainerProfile } from './pages/trainer/Profile'
 import { Login } from './pages/Login'
 import { AdminDashboard } from './pages/admin/Dashboard'
 import { AdminMembers } from './pages/admin/Members'
@@ -38,6 +43,16 @@ export const router = createBrowserRouter([
       { path: 'classes', element: <PortalClasses /> },
       { path: 'bookings', element: <PortalMyBookings /> },
       { path: 'profile', element: <PortalProfile /> },
+    ],
+  },
+  {
+    path: '/trainer',
+    element: <ProtectedRoute requiredRole="trainer"><TrainerLayout /></ProtectedRoute>,
+    children: [
+      { index: true, element: <TrainerDashboard /> },
+      { path: 'classes', element: <TrainerClasses /> },
+      { path: 'classes/:id', element: <TrainerClassDetail /> },
+      { path: 'profile', element: <TrainerProfile /> },
     ],
   },
 ])

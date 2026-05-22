@@ -14,7 +14,7 @@ export function Login() {
 
   useEffect(() => {
     if (!loading && session && profile) {
-      navigate(profile.role === 'admin' ? '/admin' : '/portal', { replace: true })
+      navigate(profile.role === 'admin' ? '/admin' : profile.role === 'trainer' ? '/trainer' : '/portal', { replace: true })
     }
   }, [session, profile, loading, navigate])
 
