@@ -63,7 +63,10 @@ export function TrainerClasses() {
         is_cancelled: editing.is_cancelled,
       })
     } else if (recurrence.enabled) {
-      const occurrences = generateOccurrences(form.datetime, recurrence.days, recurrence.endDate, base)
+      const occurrences = generateOccurrences(form.datetime, recurrence.days, recurrence.endDate, {
+        ...base,
+        recurrence_group_id: crypto.randomUUID(),
+      })
       if (occurrences.length === 0) {
         setFormError('Nicio apariție în intervalul selectat. Verifică zilele și data de final.')
         return
