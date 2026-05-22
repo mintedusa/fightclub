@@ -34,6 +34,7 @@ export function AdminMembers() {
     setOpen(false)
     setCreated(null)
     setFormError(null)
+    setForm({ email: '', full_name: '', phone: '', password: '', role: 'member' })
   }
 
   return (

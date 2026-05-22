@@ -6,8 +6,8 @@ export function useMembers(search?: string) {
   return useQuery({
     queryKey: ['members', search],
     queryFn: async () => {
-      let q = supabase.from('profiles').select('*').eq('role', 'member').order('full_name')
-      if (search) q = q.ilike('full_name', `%${search}%`)
+      let q = supabase.from('profiles').select('*').neq('role', 'admin').order('full_name')
+      if (search) q = q.or(`full_name.ilike.%${search}%,email.ilike.%${search}%`)
       const { data, error } = await q
       if (error) throw error
       return data as Profile[]
@@ -40,10 +40,12 @@ export function useCreateMember() {
       await supabase.rpc('admin_confirm_user', { user_email: data.email })
 
       if (data.role === 'trainer') {
-        await supabase.from('profiles').update({ role: 'trainer' }).eq('email', data.email)
+        const { error: roleError } = await supabase.from('profiles').update({ role: 'trainer' }).eq('email', data.email)
+        if (roleError) throw roleError
       }
       if (data.phone) {
-        await supabase.from('profiles').update({ phone: data.phone }).eq('email', data.email)
+        const { error: phoneError } = await supabase.from('profiles').update({ phone: data.phone }).eq('email', data.email)
+        if (phoneError) throw phoneError
       }
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ['members'] }),
