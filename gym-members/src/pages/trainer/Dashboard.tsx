@@ -11,6 +11,7 @@ export function TrainerDashboard() {
 
   const upcoming = (classes ?? [])
     .filter(c => !c.is_cancelled && new Date(c.datetime) > new Date())
+    .sort((a, b) => new Date(a.datetime).getTime() - new Date(b.datetime).getTime())
     .slice(0, 5)
 
   return (
