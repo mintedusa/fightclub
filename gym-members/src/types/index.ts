@@ -1,4 +1,4 @@
-export type Role = 'admin' | 'member'
+export type Role = 'admin' | 'member' | 'trainer'
 export type SubscriptionStatus = 'active' | 'expired' | 'frozen'
 export type BookingStatus = 'confirmed' | 'cancelled' | 'attended'
 
