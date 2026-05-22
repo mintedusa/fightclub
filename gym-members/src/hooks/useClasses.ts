@@ -122,3 +122,92 @@ export function useClassBookings(classId: string) {
     },
   })
 }
+
+export function useSeriesInstances(recurrenceGroupId: string | null | undefined) {
+  return useQuery({
+    queryKey: ['series-instances', recurrenceGroupId],
+    enabled: !!recurrenceGroupId,
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('classes')
+        .select('*, bookings_count:bookings(count)')
+        .eq('recurrence_group_id', recurrenceGroupId!)
+        .order('datetime')
+      if (error) throw error
+      return (data ?? []).map(c => ({
+        ...c,
+        bookings_count: (c.bookings_count as unknown as { count: number }[])[0]?.count ?? 0,
+      })) as Class[]
+    },
+  })
+}
+
+export function useUpdateClassSeries() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: async ({
+      recurrenceGroupId,
+      updates,
+    }: {
+      recurrenceGroupId: string
+      updates: {
+        name?: string
+        instructor?: string
+        time?: string   // "HH:mm"
+        capacity?: number
+        location?: string
+        is_cancelled?: boolean
+      }
+    }) => {
+      // Fetch all instances to update datetimes when time changes
+      if (updates.time !== undefined) {
+        const { data, error } = await supabase
+          .from('classes')
+          .select('id, datetime')
+          .eq('recurrence_group_id', recurrenceGroupId)
+        if (error) throw error
+
+        const [hStr, mStr] = updates.time.split(':')
+        const h = parseInt(hStr, 10)
+        const m = parseInt(mStr, 10)
+
+        for (const inst of data ?? []) {
+          const dt = new Date(inst.datetime)
+          dt.setHours(h, m, 0, 0)
+          const { error: updateError } = await supabase
+            .from('classes')
+            .update({ ...getCommonUpdates(updates), datetime: dt.toISOString() })
+            .eq('id', inst.id)
+          if (updateError) throw updateError
+        }
+      } else {
+        const { error } = await supabase
+          .from('classes')
+          .update(getCommonUpdates(updates))
+          .eq('recurrence_group_id', recurrenceGroupId)
+        if (error) throw error
+      }
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['classes'] })
+      qc.invalidateQueries({ queryKey: ['trainer-classes'] })
+      qc.invalidateQueries({ queryKey: ['series-instances'] })
+    },
+  })
+}
+
+function getCommonUpdates(updates: {
+  name?: string
+  instructor?: string
+  capacity?: number
+  location?: string
+  is_cancelled?: boolean
+}) {
+  const result: Record<string, unknown> = {}
+  if (updates.name !== undefined) result.name = updates.name
+  if (updates.instructor !== undefined) result.instructor = updates.instructor
+  if (updates.capacity !== undefined) result.capacity = updates.capacity
+  if (updates.location !== undefined) result.location = updates.location
+  if (updates.is_cancelled !== undefined) result.is_cancelled = updates.is_cancelled
+  return result
+}
