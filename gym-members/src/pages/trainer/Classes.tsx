@@ -6,23 +6,30 @@ import { Badge } from '../../components/ui/Badge'
 import { Modal } from '../../components/ui/Modal'
 import { Input } from '../../components/ui/Input'
 import { Table } from '../../components/ui/Table'
-import { useTrainerClasses, useCreateClass, useUpdateClass } from '../../hooks/useClasses'
+import { RecurrenceFields } from '../../components/ui/RecurrenceFields'
+import { useTrainerClasses, useCreateClass, useCreateClasses, useUpdateClass } from '../../hooks/useClasses'
+import { generateOccurrences, type RecurrenceState } from '../../lib/recurrence'
 import { useAuthContext } from '../../contexts/AuthContext'
 import type { Class } from '../../types'
+
+const EMPTY_RECURRENCE: RecurrenceState = { enabled: false, days: [], endDate: '' }
 
 export function TrainerClasses() {
   const navigate = useNavigate()
   const { profile } = useAuthContext()
   const { data: classes } = useTrainerClasses()
   const createClass = useCreateClass()
+  const createClasses = useCreateClasses()
   const updateClass = useUpdateClass()
   const [open, setOpen] = useState(false)
   const [editing, setEditing] = useState<Class | null>(null)
   const [form, setForm] = useState({ name: '', datetime: '', capacity: '', location: 'Sala 1' })
+  const [recurrence, setRecurrence] = useState<RecurrenceState>(EMPTY_RECURRENCE)
 
   function openCreate() {
     setEditing(null)
     setForm({ name: '', datetime: '', capacity: '', location: 'Sala 1' })
+    setRecurrence(EMPTY_RECURRENCE)
     setOpen(true)
   }
 
@@ -34,25 +41,36 @@ export function TrainerClasses() {
       capacity: String(cls.capacity),
       location: cls.location,
     })
+    setRecurrence(EMPTY_RECURRENCE)
     setOpen(true)
   }
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault()
-    const data = {
+    const base = {
       name: form.name,
       instructor: profile!.full_name,
-      datetime: new Date(form.datetime).toISOString(),
       capacity: parseInt(form.capacity),
       location: form.location,
     }
     if (editing) {
-      await updateClass.mutateAsync({ id: editing.id, ...data, is_cancelled: editing.is_cancelled })
+      await updateClass.mutateAsync({
+        id: editing.id,
+        ...base,
+        datetime: new Date(form.datetime).toISOString(),
+        is_cancelled: editing.is_cancelled,
+      })
+    } else if (recurrence.enabled) {
+      const occurrences = generateOccurrences(form.datetime, recurrence.days, recurrence.endDate, base)
+      await createClasses.mutateAsync(occurrences)
     } else {
-      await createClass.mutateAsync(data)
+      await createClass.mutateAsync({ ...base, datetime: new Date(form.datetime).toISOString() })
     }
     setOpen(false)
   }
+
+  const isSaving = createClass.isPending || createClasses.isPending || updateClass.isPending
+  const recurrenceInvalid = recurrence.enabled && (recurrence.days.length === 0 || !recurrence.endDate)
 
   return (
     <div className="space-y-6">
@@ -87,7 +105,7 @@ export function TrainerClasses() {
           <Input label="Data și ora" type="datetime-local" value={form.datetime} onChange={e => setForm(f => ({ ...f, datetime: e.target.value }))} required />
           <Input label="Capacitate maximă" type="number" value={form.capacity} onChange={e => setForm(f => ({ ...f, capacity: e.target.value }))} required />
           <Input label="Locație" value={form.location} onChange={e => setForm(f => ({ ...f, location: e.target.value }))} required />
-          {editing && (
+          {editing ? (
             <label className="flex items-center gap-2 text-sm text-zinc-300 cursor-pointer">
               <input
                 type="checkbox"
@@ -97,10 +115,16 @@ export function TrainerClasses() {
               />
               Marchează ca anulată
             </label>
+          ) : (
+            <RecurrenceFields
+              value={recurrence}
+              onChange={setRecurrence}
+              startDate={form.datetime.slice(0, 10)}
+            />
           )}
           <div className="flex justify-end gap-3">
             <Button variant="ghost" type="button" onClick={() => setOpen(false)}>Anulează</Button>
-            <Button type="submit" loading={createClass.isPending || updateClass.isPending}>Salvează</Button>
+            <Button type="submit" loading={isSaving} disabled={recurrenceInvalid}>Salvează</Button>
           </div>
         </form>
       </Modal>
