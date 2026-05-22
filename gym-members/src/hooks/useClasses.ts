@@ -53,6 +53,23 @@ export function useCreateClass() {
   })
 }
 
+export function useCreateClasses() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: Omit<Class, 'id' | 'is_cancelled' | 'bookings_count'>[]) => {
+      const { error } = await supabase
+        .from('classes')
+        .insert(data.map(c => ({ ...c, is_cancelled: false })))
+      if (error) throw error
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['classes'] })
+      qc.invalidateQueries({ queryKey: ['trainer-classes'] })
+      qc.invalidateQueries({ queryKey: ['trainer-stats'] })
+    },
+  })
+}
+
 export function useUpdateClass() {
   const qc = useQueryClient()
   return useMutation({
