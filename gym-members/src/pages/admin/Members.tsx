@@ -14,17 +14,17 @@ export function AdminMembers() {
   const { data: members, isLoading } = useMembers(search)
   const createMember = useCreateMember()
 
-  const [form, setForm] = useState({ email: '', full_name: '', phone: '' })
+  const [form, setForm] = useState({ email: '', full_name: '', phone: '', password: '', role: 'member' as 'member' | 'trainer' })
   const [formError, setFormError] = useState<string | null>(null)
-  const [created, setCreated] = useState<{ email: string; password: string } | null>(null)
+  const [created, setCreated] = useState<{ email: string; role: string } | null>(null)
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault()
     setFormError(null)
     try {
-      const result = await createMember.mutateAsync(form)
-      setCreated({ email: form.email, password: result?.tempPassword ?? '' })
-      setForm({ email: '', full_name: '', phone: '' })
+      await createMember.mutateAsync(form)
+      setCreated({ email: form.email, role: form.role })
+      setForm({ email: '', full_name: '', phone: '', password: '', role: 'member' })
     } catch (err: unknown) {
       setFormError(err instanceof Error ? err.message : 'Eroare la creare.')
     }
@@ -75,14 +75,13 @@ export function AdminMembers() {
       <Modal open={open} onClose={handleClose} title="Adaugă membru nou">
         {created ? (
           <div className="space-y-4">
-            <p className="text-green-400 text-sm font-medium">Cont creat cu succes!</p>
-            <div className="rounded-lg bg-zinc-800 p-4 space-y-2">
+            <p className="text-green-400 text-sm font-medium">
+              Cont {created.role === 'trainer' ? 'trainer' : 'membru'} creat cu succes!
+            </p>
+            <div className="rounded-lg bg-zinc-800 p-4">
               <p className="text-xs text-zinc-400">Email</p>
               <p className="text-white font-mono">{created.email}</p>
-              <p className="text-xs text-zinc-400 mt-3">Parolă temporară</p>
-              <p className="text-red-400 font-mono text-lg font-bold tracking-wider">{created.password}</p>
             </div>
-            <p className="text-xs text-zinc-500">Comunică aceste date membrului. El le poate schimba din portal după prima logare.</p>
             <div className="flex justify-end">
               <Button onClick={handleClose}>Închide</Button>
             </div>
@@ -92,10 +91,22 @@ export function AdminMembers() {
             <Input label="Nume complet" value={form.full_name} onChange={e => setForm(f => ({ ...f, full_name: e.target.value }))} required />
             <Input label="Email" type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} required />
             <Input label="Telefon" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
+            <div>
+              <label className="block text-sm font-medium text-zinc-300 mb-1.5">Rol</label>
+              <select
+                value={form.role}
+                onChange={e => setForm(f => ({ ...f, role: e.target.value as 'member' | 'trainer' }))}
+                className="w-full rounded-lg bg-zinc-800 border border-zinc-700 text-white px-3 py-2 text-sm focus:outline-none focus:border-red-500"
+              >
+                <option value="member">Membru</option>
+                <option value="trainer">Trainer</option>
+              </select>
+            </div>
+            <Input label="Parolă" type="password" value={form.password} onChange={e => setForm(f => ({ ...f, password: e.target.value }))} required minLength={6} />
             {formError && <p className="text-sm text-red-400">{formError}</p>}
             <div className="flex justify-end gap-3">
               <Button variant="ghost" type="button" onClick={handleClose}>Anulează</Button>
-              <Button type="submit" loading={createMember.isPending}>Trimite invitație</Button>
+              <Button type="submit" loading={createMember.isPending}>Creează cont</Button>
             </div>
           </form>
         )}
