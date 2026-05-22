@@ -31,7 +31,12 @@
       "Bash(git -C /Users/filimoncristian/Sites/fightclub log --oneline 55c158b..ffc44ca)",
       "Bash(git -C /Users/filimoncristian/Sites/fightclub diff 55c158b..ffc44ca -- vite.config.ts src/index.css package.json)",
       "Bash(git -C /Users/filimoncristian/Sites/fightclub diff 55c158b..ffc44ca -- src/main.tsx src/App.tsx src/App.css index.html tsconfig.app.json tsconfig.json)",
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(npm list:*)",
+      "Bash(npm install:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git status:*)"
     ]
   }
 }
