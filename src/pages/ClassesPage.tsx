@@ -31,7 +31,7 @@ export default function ClassesPage() {
         <title>Clase & Programe — FightClub Galați</title>
         <meta
           name="description"
-          content="Descoperă toate clasele noastre de fitness din Galați. Box Thai, Power Step, Yoga, Spinning, MMA, Kickbox."
+          content="Descoperă toate clasele noastre de fitness din Galați. Mortal Kombat, Bosu, SuperFit, Pilates, Tabata, Body Pump și mai mult."
         />
       </Helmet>
 

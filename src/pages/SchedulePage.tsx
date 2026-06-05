@@ -8,7 +8,7 @@ export default function SchedulePage() {
         <title>Orar Clase — FightClub Galați</title>
         <meta
           name="description"
-          content="Programul complet al claselor de fitness din Galați. Box Thai, Power Step, Yoga, Spinning, MMA, Kickbox."
+          content="Programul complet al claselor de fitness din Galați. Mortal Kombat, Bosu, SuperFit, Pilates, Tabata, Body Pump și mai mult."
         />
       </Helmet>
 

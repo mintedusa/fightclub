@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/usr/local/Cellar/node/20.8.0/bin/node /usr/local/Cellar/node/20.8.0/bin/npm run dev)",
+      "Bash(/usr/local/Cellar/node/26.0.0/bin/node --version)",
+      "Bash(/usr/local/Cellar/node/26.0.0/bin/node /usr/local/Cellar/node/26.0.0/bin/npm run dev)",
+      "Bash(git push *)"
+    ]
+  }
+}

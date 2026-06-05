@@ -33,7 +33,7 @@ const navLinks = [
   { label: 'Contact',  href: '/contact'  },
 ];
 
-const classLinks = ['Box Thai', 'Power Step', 'Yoga', 'Spinning', 'MMA', 'Kickbox'];
+const classLinks = ['Mortal Kombat', 'Body Kombat', 'Full Body', 'Bosu', 'Tabata', 'Functional Step', 'Pilates', 'Body Pump', 'SuperFit', 'Surpriza', 'Aerobic Stretching'];
 
 export default function Footer() {
   return (

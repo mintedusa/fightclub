@@ -16,7 +16,7 @@ export default function HomePage() {
         <title>FightClub Galați — Sala de Fitness #1 din Galați</title>
         <meta
           name="description"
-          content="Antrenează-te la FightClub Galați. Box, Power Step, Yoga, MMA și mai mult. 500+ membri, 12 traineri certificați. Strada Saturn 34, Galați."
+          content="Antrenează-te la FightClub Galați. Mortal Kombat, Bosu, SuperFit, Pilates și mai mult. Strada Saturn 34, Galați."
         />
       </Helmet>
 

@@ -90,7 +90,7 @@ export default function HeroSection() {
           ref={subtitleRef}
           className="text-white/80 text-lg sm:text-xl mb-8 max-w-xl opacity-0"
         >
-          Sala de fitness #1 din Galați — Box, Power Step, Yoga, MMA și mai mult.
+          Sala de fitness #1 din Galați — Mortal Kombat, Bosu, SuperFit, Pilates și mai mult.
           Alătură-te celor 500+ membri care și-au transformat viața.
         </p>
 
