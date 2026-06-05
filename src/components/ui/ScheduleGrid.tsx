@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { classes } from '../../data/classes';
-import { scheduleEntries, categoryColors } from '../../data/schedule';
+import { scheduleClasses, scheduleEntries, categoryColors } from '../../data/schedule';
 import type { DayKey } from '../../types';
 
 const DAYS: { key: DayKey; label: string; short: string }[] = [
@@ -14,14 +13,14 @@ const DAYS: { key: DayKey; label: string; short: string }[] = [
   { key: 'duminica', label: 'Duminică', short: 'D'  },
 ];
 
-const START_HOUR = 7;
-const END_HOUR = 22;
+const START_HOUR = 8;
+const END_HOUR = 21;
 const TOTAL_HOURS = END_HOUR - START_HOUR;
-const HOUR_HEIGHT = 50;
+const HOUR_HEIGHT = 55;
 const GRID_HEIGHT = TOTAL_HOURS * HOUR_HEIGHT;
 const HOURS = Array.from({ length: TOTAL_HOURS + 1 }, (_, i) => START_HOUR + i);
 
-const classMap = Object.fromEntries(classes.map((c) => [c.id, c]));
+const classMap = Object.fromEntries(scheduleClasses.map((c) => [c.id, c]));
 
 function timeToPercent(time: string): number {
   const [h, m] = time.split(':').map(Number);
@@ -188,7 +187,7 @@ function MobileDayList({ day }: { day: DayKey }) {
         const color = categoryColors[cls.category as keyof typeof categoryColors] ?? '#F5C518';
         return (
           <div
-            key={`${entry.day}-${entry.classId}`}
+            key={`${entry.day}-${entry.classId}-${entry.startTime}`}
             className="flex items-start gap-3 p-4 rounded-lg bg-surface"
             style={{ borderLeft: `4px solid ${color}` }}
           >

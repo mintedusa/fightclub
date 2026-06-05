@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import HeroSection from '../components/sections/HeroSection';
-import StatsSection from '../components/sections/StatsSection';
+import AppBannerSection from '../components/sections/AppBannerSection';
 import ClassesSection from '../components/sections/ClassesSection';
 import ScheduleSection from '../components/sections/ScheduleSection';
 import TrainersSection from '../components/sections/TrainersSection';
@@ -21,7 +21,7 @@ export default function HomePage() {
       </Helmet>
 
       <HeroSection />
-      <StatsSection />
+      <AppBannerSection />
       <ClassesSection />
       <ScheduleSection />
       <TrainersSection />
