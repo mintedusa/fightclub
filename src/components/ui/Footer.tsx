@@ -45,7 +45,7 @@ export default function Footer() {
               <img src={logoUrl} alt="FightClub Galați" className="h-[95px] w-auto" />
             </div>
             <p className="text-muted text-sm leading-relaxed">
-              Forjează-ți limitele la FightClub Galați. Sala de fitness #1 din Galați.
+              Antrenamente de grup cu instructori dedicați. FightClub Galați — unde energia te transformă.
             </p>
           </div>
 

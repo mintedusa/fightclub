@@ -3,12 +3,14 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-gold: #F5C518;
-  --color-gold-dark: #D4A800;
-  --color-dark: #0A0A0A;
-  --color-surface: #111111;
-  --color-surface-2: #1A1A1A;
-  --color-muted: #A0A0A0;
+  --color-gold: #DAC0A3;
+  --color-gold-dark: #C4A88C;
+  --color-dark: #07101F;
+  --color-surface: #0F1929;
+  --color-surface-2: #0F2C59;
+  --color-muted: #EADBC8;
+  --font-display: 'Oswald', sans-serif;
+  --font-body: 'Inter', sans-serif;
 }
 
 html {
@@ -19,6 +21,12 @@ body {
   background-color: var(--color-dark);
   color: #ffffff;
   overflow-x: hidden;
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
 }
 
 * {

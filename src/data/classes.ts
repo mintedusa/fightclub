@@ -69,7 +69,7 @@ export const classes: GymClass[] = [
     title: 'Body Pump',
     level: 'Intermediar',
     schedule: 'Mi  19:30 - 20:30',
-    image: 'https://images.unsplash.com/photo-1534368786749-b63e05c92717?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600&q=80',
     description: 'Clasă de forță cu bara și greutăți pe muzică — tonifiere completă și creștere a masei musculare.',
     category: 'Funcțional',
   },
