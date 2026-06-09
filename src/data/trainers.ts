@@ -1,6 +1,6 @@
 import type { Trainer } from '../types';
-import ionutImg from '../assets/Ionut.jpg';
-import narcisaImg from '../assets/Narcisa.jpg';
+import ionutImg from '../assets/Ionut.webp';
+import narcisaImg from '../assets/Narcisa.webp';
 
 export const trainers: Trainer[] = [
   {

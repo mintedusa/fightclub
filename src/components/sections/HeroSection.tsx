@@ -1,5 +1,5 @@
 // src/components/sections/HeroSection.tsx
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
@@ -16,10 +16,25 @@ declare module 'gsap' {
 
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
-const HERO_VIDEO = `${import.meta.env.BASE_URL}hero.mp4`;
-const HERO_POSTER = `${import.meta.env.BASE_URL}hero-poster.jpg`;
+const HERO_VIDEO        = `${import.meta.env.BASE_URL}hero.mp4`;
+const HERO_VIDEO_MOBILE = `${import.meta.env.BASE_URL}hero-mobile.mp4`;
+const HERO_POSTER       = `${import.meta.env.BASE_URL}hero-poster.jpg`;
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  );
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+  return isMobile;
+}
 
 export default function HeroSection() {
+  const isMobile = useIsMobile();
   const { scrollTo } = useSmoothScroll();
   const bgRef = useRef<HTMLDivElement>(null);
   const line1Ref = useRef<HTMLSpanElement>(null);
@@ -68,14 +83,12 @@ export default function HeroSection() {
     >
       <div ref={bgRef} className="absolute inset-0 scale-110">
         <video
-          autoPlay
-          muted
-          loop
-          playsInline
+          key={isMobile ? 'mobile' : 'desktop'}
+          autoPlay muted loop playsInline
           poster={HERO_POSTER}
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src={HERO_VIDEO} type="video/mp4" />
+          <source src={isMobile ? HERO_VIDEO_MOBILE : HERO_VIDEO} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/60" />
       </div>
