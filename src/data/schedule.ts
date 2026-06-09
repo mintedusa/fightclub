@@ -66,3 +66,9 @@ export const categoryColors: Record<ScheduleCategory, string> = {
   Funcțional: '#22C55E',
   Wellness:   '#A855F7',
 };
+
+export const activeCategoryColors = Object.fromEntries(
+  Object.entries(categoryColors).filter(([cat]) =>
+    scheduleClasses.some((c) => c.category === cat)
+  )
+) as Partial<Record<ScheduleCategory, string>>;

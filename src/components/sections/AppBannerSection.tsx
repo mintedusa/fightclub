@@ -1,18 +1,27 @@
-import { Smartphone } from 'lucide-react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+import gmaLogo from '../../assets/gma-app.png';
 
-function AppleIcon() {
+const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.companyname.gma&pcampaignid=web_share';
+const APP_STORE_URL = 'https://apps.apple.com/ro/app/gma-gym-management-app/id1496040256';
+
+function GooglePlayIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
-      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+    <svg className="w-6 h-6" aria-hidden="true" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+      <path fill="none" d="M0,0h40v40H0V0z" />
+      <path d="M19.7,19.2L4.3,35.3c0.5,1.7,2.1,3,4,3c0.8,0,1.5-0.2,2.1-0.6l17.4-9.9L19.7,19.2z" fill="#EA4335" />
+      <path d="M35.3,16.4l-7.5-4.3l-8.4,7.4l8.5,8.3l7.5-4.2c1.3-0.7,2.2-2.1,2.2-3.6C37.5,18.5,36.6,17.1,35.3,16.4z" fill="#FBBC04" />
+      <path d="M4.3,4.7C4.2,5,4.2,5.4,4.2,5.8v28.5c0,0.4,0,0.7,0.1,1.1l16-15.7L4.3,4.7z" fill="#4285F4" />
+      <path d="M19.8,20l8-7.9L10.5,2.3C9.9,1.9,9.1,1.7,8.3,1.7c-1.9,0-3.6,1.3-4,3L19.8,20z" fill="#34A853" />
     </svg>
   );
 }
 
-function GooglePlayIcon() {
+function AppStoreIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
-      <path d="M3.18 23.76c.34.19.72.24 1.09.14l11.34-11.35L12 9l-8.82 14.76zM20.9 10.98L18.1 9.4l-3.44 3.44 3.44 3.44 2.81-1.58c.8-.45.8-1.67-.01-2.12zM2.01 1.35C1.9 1.62 1.84 1.93 1.84 2.27v19.46c0 .34.06.65.18.92L13.07 12 2.01 1.35zm10.44 9.21l3.07-3.07L4.27.35C3.9.25 3.52.3 3.18.49L13.5 10.56l-1.05.01z" />
+    <svg className="h-5 w-auto" viewBox="0 0 121 21" xmlns="http://www.w3.org/2000/svg" focusable="false">
+      <g fill="currentColor" fillRule="nonzero" opacity=".9">
+        <path d="M11.417 12.204H8.094l5.8-10.067c.19-.328.25-.683.178-1.065a1.214 1.214 0 0 0-.637-.87c-.357-.21-.717-.25-1.082-.121a1.43 1.43 0 0 0-.811.684l-.575.942-.572-.942a1.46 1.46 0 0 0-.81-.69c-.361-.132-.722-.09-1.084.128-.354.204-.563.495-.628.874-.065.379-.003.732.188 1.06L9.412 4.45l-4.49 7.755H1.434c-.37 0-.7.126-.994.378-.293.253-.44.583-.44.992 0 .404.147.731.44.983.293.252.625.378.994.378h11.979a2.449 2.449 0 0 0-.017-1.242 2.097 2.097 0 0 0-.66-1.06c-.327-.286-.767-.429-1.32-.429Zm9.086 0h-3.477l-3.798-6.559c-.38.28-.65.694-.811 1.244a4.654 4.654 0 0 0-.154 1.755c.058.62.226 1.172.506 1.656l4.798 8.288c.184.327.457.555.818.685.36.13.721.093 1.084-.112.355-.199.569-.489.64-.87.072-.382.013-.74-.179-1.073L18.6 14.935h1.904c.374 0 .707-.126.998-.378.29-.252.436-.58.436-.983 0-.409-.146-.74-.436-.992a1.479 1.479 0 0 0-.998-.378Zm-17.72 3.713-.758 1.3c-.19.334-.251.69-.184 1.069.068.378.276.67.625.875.368.21.732.249 1.094.116a1.51 1.51 0 0 0 .818-.689l1.106-1.881c-.088-.159-.257-.325-.506-.498a2.474 2.474 0 0 0-.937-.374c-.376-.075-.795-.048-1.257.082ZM28.145 16.906h2.768l1.251-3.825h5.506l1.251 3.825h2.78L36.408 2.109h-2.973l-5.291 14.797Zm6.747-12.162h.061l2.05 6.296h-4.172l2.06-6.296ZM43.013 20.494h2.553V15.07h.051c.615 1.272 1.856 2.05 3.404 2.05 2.728 0 4.471-2.152 4.471-5.639v-.01c0-3.507-1.743-5.66-4.501-5.66-1.559 0-2.748.8-3.374 2.102h-.051V6.036h-2.553v14.458Zm5.219-5.526c-1.58 0-2.687-1.364-2.687-3.487v-.01c0-2.133 1.108-3.507 2.687-3.507 1.63 0 2.656 1.333 2.656 3.507v.01c0 2.143-1.026 3.487-2.656 3.487ZM55.133 20.494h2.553V15.07h.051c.616 1.272 1.856 2.05 3.405 2.05 2.727 0 4.47-2.152 4.47-5.639v-.01c0-3.507-1.743-5.66-4.501-5.66-1.559 0-2.748.8-3.374 2.102h-.051V6.036h-2.553v14.458Zm5.219-5.526c-1.58 0-2.687-1.364-2.687-3.487v-.01c0-2.133 1.108-3.507 2.687-3.507 1.63 0 2.656 1.333 2.656 3.507v.01c0 2.143-1.026 3.487-2.656 3.487ZM76.912 17.162c3.61 0 5.783-1.754 5.783-4.512v-.01c0-2.307-1.343-3.558-4.42-4.194l-1.599-.328c-1.784-.37-2.594-.984-2.594-2.03v-.01c0-1.18 1.077-1.99 2.81-2 1.66 0 2.799.769 2.973 2.06l.02.124h2.533l-.01-.174c-.154-2.533-2.266-4.235-5.496-4.235-3.189 0-5.476 1.763-5.486 4.368v.01c0 2.205 1.436 3.558 4.348 4.163l1.59.328c1.906.4 2.676.995 2.676 2.102v.01c0 1.272-1.17 2.103-3.036 2.103-1.856 0-3.158-.79-3.353-2.061l-.02-.123h-2.533l.01.154c.175 2.655 2.41 4.255 5.804 4.255ZM88.458 17.12c.513 0 .964-.05 1.261-.091V15.11c-.174.01-.369.041-.615.041-.933 0-1.405-.338-1.405-1.405V8.005h2.02V6.036H87.7V3.278h-2.594v2.758h-1.538v1.97h1.538v5.957c0 2.235 1.077 3.158 3.353 3.158ZM96.271 17.12c3.19 0 5.26-2.122 5.26-5.649v-.02c0-3.507-2.101-5.64-5.27-5.64-3.158 0-5.25 2.153-5.25 5.64v.02c0 3.517 2.061 5.65 5.26 5.65Zm.01-2.06c-1.63 0-2.665-1.302-2.665-3.589v-.02c0-2.256 1.056-3.569 2.645-3.569 1.62 0 2.666 1.302 2.666 3.568v.021c0 2.276-1.035 3.589-2.645 3.589ZM103.172 16.906h2.554v-6.307c0-1.61.871-2.522 2.317-2.522.43 0 .82.061 1.036.143V5.913a3.326 3.326 0 0 0-.81-.102c-1.251 0-2.154.79-2.492 2.102h-.051V6.036h-2.554v10.87ZM115.17 17.12c2.84 0 4.44-1.68 4.778-3.352l.03-.113h-2.389l-.02.072c-.246.728-1.077 1.405-2.348 1.405-1.661 0-2.707-1.128-2.748-3.036h7.608v-.82c0-3.281-1.928-5.465-5.035-5.465s-5.106 2.256-5.106 5.68v.01c0 3.456 1.969 5.62 5.23 5.62Zm-.093-9.31c1.354 0 2.338.862 2.523 2.584h-5.097c.205-1.671 1.22-2.584 2.574-2.584Z" transform="translate(.086 .095)" />
+      </g>
     </svg>
   );
 }
@@ -25,9 +34,7 @@ export default function AppBannerSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <div className="bg-gold/10 border border-gold/30 rounded-xl p-3">
-              <Smartphone className="w-7 h-7 text-gold" />
-            </div>
+            <img src={gmaLogo} alt="GMA" className="w-16 h-16 rounded-2xl object-contain" />
             <div>
               <p className="text-xs text-gold font-bold uppercase tracking-widest mb-0.5">
                 Anunț
@@ -44,21 +51,22 @@ export default function AppBannerSection() {
 
           <div className="flex items-center gap-3 shrink-0">
             <a
-              href="#"
-              className="flex items-center gap-2.5 bg-white/5 hover:bg-white/10 border border-white/15 hover:border-gold/50 text-white px-4 py-2.5 rounded-xl transition-all duration-200 group"
+              href={APP_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 bg-white/5 hover:bg-white/10 border border-white/15 hover:border-gold/50 text-white px-4 py-3 rounded-xl transition-all duration-200"
             >
-              <AppleIcon />
-              <div className="text-left leading-tight">
-                <p className="text-[10px] text-white/60 group-hover:text-white/80 transition-colors">
-                  Disponibil pe
-                </p>
-                <p className="text-sm font-semibold">App Store</p>
+              <div className="flex flex-col gap-0.5">
+                <p className="text-[10px] text-white/60 leading-none">Disponibil pe</p>
+                <AppStoreIcon />
               </div>
             </a>
 
             <a
-              href="#"
-              className="flex items-center gap-2.5 bg-white/5 hover:bg-white/10 border border-white/15 hover:border-gold/50 text-white px-4 py-2.5 rounded-xl transition-all duration-200 group"
+              href={GOOGLE_PLAY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 bg-white/5 hover:bg-white/10 border border-white/15 hover:border-gold/50 text-white px-4 py-3 rounded-xl transition-all duration-200 group"
             >
               <GooglePlayIcon />
               <div className="text-left leading-tight">

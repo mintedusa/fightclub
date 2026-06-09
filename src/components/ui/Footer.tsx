@@ -105,7 +105,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-6 text-center text-muted text-sm">
-          © 2025 FightClub Galați. Toate drepturile rezervate.
+          © 2026 FightClub Galați. Toate drepturile rezervate.
         </div>
       </div>
     </footer>

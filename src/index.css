@@ -3,12 +3,12 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-gold: #DAC0A3;
-  --color-gold-dark: #C4A88C;
-  --color-dark: #07101F;
-  --color-surface: #0F1929;
-  --color-surface-2: #0F2C59;
-  --color-muted: #EADBC8;
+  --color-gold: #C7843B;
+  --color-gold-dark: #A8692A;
+  --color-dark: #000101;
+  --color-surface: #172531;
+  --color-surface-2: #2C4657;
+  --color-muted: #F3BD68;
   --font-display: 'Oswald', sans-serif;
   --font-body: 'Inter', sans-serif;
 }

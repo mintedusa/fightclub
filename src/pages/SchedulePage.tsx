@@ -5,11 +5,13 @@ export default function SchedulePage() {
   return (
     <>
       <Helmet>
-        <title>Orar Clase — FightClub Galați</title>
-        <meta
-          name="description"
-          content="Programul complet al claselor de fitness din Galați. Mortal Kombat, Bosu, SuperFit, Pilates, Tabata, Body Pump și mai mult."
-        />
+        <title>Orar Clase Fitness Galați 2026 | FightClub Galați</title>
+        <meta name="description" content="Orarul săptămânal al claselor de fitness din Galați. Luni–Sâmbătă, 08:00–21:00. Mortal Kombat, Body Pump, Pilates, Tabata, Bosu și mai mult." />
+        <link rel="canonical" href="https://fightclubgalati.ro/orar" />
+        <meta property="og:title" content="Orar Clase Fitness | FightClub Galați" />
+        <meta property="og:description" content="Program complet Luni–Sâmbătă. Clase de aerobic și fitness pentru toate nivelele." />
+        <meta property="og:url" content="https://fightclubgalati.ro/orar" />
+        <meta property="og:image" content="https://fightclubgalati.ro/hero-poster.jpg" />
       </Helmet>
 
       <div className="pt-32 pb-12 bg-surface text-center">

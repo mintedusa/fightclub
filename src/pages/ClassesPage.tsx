@@ -28,11 +28,13 @@ export default function ClassesPage() {
   return (
     <>
       <Helmet>
-        <title>Clase & Programe — FightClub Galați</title>
-        <meta
-          name="description"
-          content="Descoperă toate clasele noastre de fitness din Galați. Mortal Kombat, Bosu, SuperFit, Pilates, Tabata, Body Pump și mai mult."
-        />
+        <title>Clase Fitness & Aerobic Galați | FightClub Galați</title>
+        <meta name="description" content="Toate clasele de fitness din Galați: Mortal Kombat, Body Pump, Pilates, Tabata, Bosu, SuperFit, Aerobic Stretching. Potrivite pentru începători și avansați." />
+        <link rel="canonical" href="https://fightclubgalati.ro/clase" />
+        <meta property="og:title" content="Clase Fitness & Aerobic Galați | FightClub" />
+        <meta property="og:description" content="11 clase de grup conduse de instructori certificați. Mortal Kombat, Body Pump, Pilates, Tabata și mai mult." />
+        <meta property="og:url" content="https://fightclubgalati.ro/clase" />
+        <meta property="og:image" content="https://fightclubgalati.ro/hero-poster.jpg" />
       </Helmet>
 
       <div className="pt-32 pb-12 bg-surface text-center">

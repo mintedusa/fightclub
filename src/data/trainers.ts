@@ -1,22 +1,24 @@
 import type { Trainer } from '../types';
+import ionutImg from '../assets/Ionut.jpg';
+import narcisaImg from '../assets/Narcisa.jpg';
 
 export const trainers: Trainer[] = [
   {
-    id: 'alexandru-ionescu',
-    name: 'Alexandru Ionescu',
-    specialty: 'Box & MMA',
-    bio: 'Campion național la box amator cu 15 ani experiență. Antrenor certificat FRBX cu peste 200 de sportivi pregătiți.',
-    avatar: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=400&q=80',
-    certifications: ['FRBX Level 3', 'MMA Coach Certified', 'First Aid'],
+    id: 'ionut',
+    name: 'Ionuț',
+    specialty: 'Fitness & Personal Trainer',
+    bio: 'Kinetoterapeut și personal trainer. Construiește programe eficiente și sigure, adaptate fiecărei persoane.',
+    avatar: ionutImg,
+    certifications: ['Facultatea de Educație Fizică și Sport', 'Kinetoterapie', 'Personal Trainer'],
     socials: { instagram: '#', facebook: '#' },
   },
   {
-    id: 'maria-constantin',
-    name: 'Maria Constantin',
-    specialty: 'Yoga & Pilates',
-    bio: 'Instructor de yoga cu certificare internațională RYT-200. Specializată în yoga terapeutică și recuperare post-traumatism.',
-    avatar: 'https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=400&q=80',
-    certifications: ['RYT-200 Yoga Alliance', 'Pilates Mat Level 2', 'Mindfulness Coach'],
+    id: 'narcisa-dorin',
+    name: 'Narcisa Dorin',
+    specialty: 'Trainer Profesionist',
+    bio: 'Trainer profesionist specializată în clasele de avansați. Conduce cu energie și precizie fiecare sesiune pentru rezultate maxime.',
+    avatar: narcisaImg,
+    certifications: ['Trainer Profesionist', 'Clase Avansați'],
     socials: { instagram: '#', facebook: '#' },
   },
   {

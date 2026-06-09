@@ -1,5 +1,4 @@
-import { FormEvent, useRef, useState } from 'react';
-import emailjs from '@emailjs/browser';
+import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
@@ -16,22 +15,24 @@ export default function ContactSection() {
   const titleRef = useScrollAnimation<HTMLDivElement>();
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: { preventDefault(): void; currentTarget: HTMLFormElement }) => {
     e.preventDefault();
     if (!formRef.current) return;
 
+    const data = Object.fromEntries(new FormData(formRef.current));
     setLoading(true);
     try {
-      await emailjs.sendForm(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID as string,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string,
-        formRef.current,
-        { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string },
-      );
+      const res = await fetch('/contact.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(data as Record<string, string>).toString(),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error);
       toast.success('Mesaj trimis cu succes! Te vom contacta în curând.');
       formRef.current.reset();
-    } catch {
-      toast.error('Eroare la trimitere. Te rugăm să încerci din nou.');
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Eroare la trimitere. Încearcă din nou.');
     } finally {
       setLoading(false);
     }
@@ -102,7 +103,7 @@ export default function ContactSection() {
 
             <div className="rounded-xl overflow-hidden h-64 lg:h-80">
               <iframe
-                src="https://maps.google.com/maps?q=Strada+Saturn+34,+Galati,+Romania&output=embed&hl=ro"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d436.24099776803075!2d28.028497130868328!3d45.421716786669734!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b6dee7c95eb2b9%3A0x648dd10277a8c124!2sFight%20club%20Gala%C8%9Bi!5e0!3m2!1sro!2sus!4v1780916202024!5m2!1sro!2sus"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

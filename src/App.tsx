@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
 import Layout from './components/ui/Layout';
+import CookieBanner from './components/ui/CookieBanner';
 import HomePage from './pages/HomePage';
 import ClassesPage from './pages/ClassesPage';
 import TrainersPage from './pages/TrainersPage';
@@ -22,13 +23,14 @@ const router = createBrowserRouter(
       ],
     },
   ],
-  { basename: '/fightclub' },
+  { basename: '/' },
 );
 
 export default function App() {
   return (
     <HelmetProvider>
       <RouterProvider router={router} />
+      <CookieBanner />
       <Toaster
         position="top-right"
         toastOptions={{

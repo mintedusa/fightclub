@@ -1,6 +1,18 @@
 Options -MultiViews
+
+<IfModule mod_security2.c>
+  <Files "contact.php">
+    SecRuleEngine Off
+  </Files>
+</IfModule>
+
 RewriteEngine On
-RewriteBase /fightclub/
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# SPA fallback — skip real files/dirs
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.html [L]

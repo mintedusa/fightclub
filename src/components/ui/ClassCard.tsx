@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import type { GymClass } from '../../types';
 
 const levelColors: Record<GymClass['level'], string> = {
-  Începător: 'bg-green-500/20 text-green-400',
-  Intermediar: 'bg-yellow-500/20 text-yellow-400',
-  Avansat: 'bg-red-500/20 text-red-400',
-  'Toate nivelele': 'bg-blue-500/20 text-blue-400',
+  Începător:      'bg-green-600 text-white',
+  Intermediar:    'bg-yellow-500 text-white',
+  Avansat:        'bg-red-600 text-white',
+  'Toate nivelele': 'bg-blue-600 text-white',
 };
 
 interface ClassCardProps {

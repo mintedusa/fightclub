@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Repeat, Smartphone } from 'lucide-react';
+import { Calendar, Repeat } from 'lucide-react';
+
+const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.companyname.gma&pcampaignid=web_share';
+const APP_STORE_URL = 'https://apps.apple.com/ro/app/gma-gym-management-app/id1496040256';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 
 interface Plan {
@@ -162,17 +165,19 @@ export default function PricingSection() {
           </p>
           <div className="flex justify-center gap-3 flex-wrap">
             <a
-              href="#"
+              href={APP_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/15 hover:border-gold/50 text-white px-5 py-2.5 rounded-xl transition-all text-sm font-semibold"
             >
-              <Smartphone className="w-4 h-4 text-gold" />
               App Store
             </a>
             <a
-              href="#"
+              href={GOOGLE_PLAY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/15 hover:border-gold/50 text-white px-5 py-2.5 rounded-xl transition-all text-sm font-semibold"
             >
-              <Smartphone className="w-4 h-4 text-gold" />
               Google Play
             </a>
           </div>

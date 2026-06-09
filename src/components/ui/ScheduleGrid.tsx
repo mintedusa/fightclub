@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { scheduleClasses, scheduleEntries, categoryColors } from '../../data/schedule';
+import { scheduleClasses, scheduleEntries, categoryColors, activeCategoryColors } from '../../data/schedule';
 import type { DayKey } from '../../types';
 
 const DAYS: { key: DayKey; label: string; short: string }[] = [
@@ -13,25 +13,10 @@ const DAYS: { key: DayKey; label: string; short: string }[] = [
   { key: 'duminica', label: 'Duminică', short: 'D'  },
 ];
 
-const START_HOUR = 8;
-const END_HOUR = 21;
-const TOTAL_HOURS = END_HOUR - START_HOUR;
-const HOUR_HEIGHT = 55;
-const GRID_HEIGHT = TOTAL_HOURS * HOUR_HEIGHT;
-const HOURS = Array.from({ length: TOTAL_HOURS + 1 }, (_, i) => START_HOUR + i);
-
 const classMap = Object.fromEntries(scheduleClasses.map((c) => [c.id, c]));
 
-function timeToPercent(time: string): number {
-  const [h, m] = time.split(':').map(Number);
-  return ((h - START_HOUR) * 60 + m) / (TOTAL_HOURS * 60) * 100;
-}
-
-function durationToPercent(startTime: string, endTime: string): number {
-  const [sh, sm] = startTime.split(':').map(Number);
-  const [eh, em] = endTime.split(':').map(Number);
-  return ((eh - sh) * 60 + (em - sm)) / (TOTAL_HOURS * 60) * 100;
-}
+// Only time slots that have at least one class
+const activeSlots = [...new Set(scheduleEntries.map((e) => e.startTime))].sort();
 
 export default function ScheduleGrid() {
   const [activeDay, setActiveDay] = useState<DayKey>('luni');
@@ -39,87 +24,77 @@ export default function ScheduleGrid() {
   return (
     <div>
       {/* Desktop grid */}
-      <div className="hidden md:flex overflow-x-auto rounded-lg border border-white/10">
-        {/* Time labels */}
-        <div className="w-14 flex-shrink-0">
-          <div className="h-10 bg-surface border-b border-white/10" />
-          <div className="relative bg-dark" style={{ height: GRID_HEIGHT }}>
-            {HOURS.map((hour) => (
-              <div
-                key={hour}
-                className="absolute right-2 text-[10px] text-muted leading-none"
-                style={{
-                  top: `${((hour - START_HOUR) / TOTAL_HOURS) * 100}%`,
-                  transform: 'translateY(-50%)',
-                }}
-              >
-                {String(hour).padStart(2, '0')}:00
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="hidden md:block overflow-x-auto rounded-lg border border-white/10">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="bg-surface border-b border-white/10">
+              <th className="w-20 py-3 text-xs font-bold text-white/50 text-center">Ora</th>
+              {DAYS.map((day) => (
+                <th key={day.key} className="py-3 text-xs font-bold text-white/70 text-center">
+                  {day.label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {activeSlots.map((slot, rowIdx) => {
+              // Find end time from any entry at this slot
+              const sampleEntry = scheduleEntries.find((e) => e.startTime === slot);
+              const endTime = sampleEntry?.endTime ?? '';
 
-        {/* Day columns */}
-        {DAYS.map((day) => {
-          const isSunday = day.key === 'duminica';
-          const dayEntries = scheduleEntries.filter((e) => e.day === day.key);
+              return (
+                <tr
+                  key={slot}
+                  className={`border-b border-white/5 ${rowIdx % 2 === 0 ? 'bg-dark' : 'bg-surface/30'}`}
+                >
+                  {/* Time label */}
+                  <td className="py-4 text-center">
+                    <span className="text-[11px] font-bold text-gold block">{slot}</span>
+                    {endTime && (
+                      <span className="text-[10px] text-muted/60">–{endTime}</span>
+                    )}
+                  </td>
 
-          return (
-            <div key={day.key} className="flex-1 min-w-0 border-l border-white/10">
-              {/* Header */}
-              <div className="h-10 flex items-center justify-center text-xs font-bold text-white/70 bg-surface border-b border-white/10">
-                {day.label}
-              </div>
-              {/* Column body */}
-              <div className="relative" style={{ height: GRID_HEIGHT }}>
-                {/* Hour lines */}
-                {HOURS.map((hour) => (
-                  <div
-                    key={hour}
-                    className="absolute left-0 right-0 border-t border-white/5"
-                    style={{ top: `${((hour - START_HOUR) / TOTAL_HOURS) * 100}%` }}
-                  />
-                ))}
-
-                {isSunday ? (
-                  <div className="absolute inset-0 flex items-center justify-center bg-surface-2/40">
-                    <span className="text-muted text-sm font-medium">Închis</span>
-                  </div>
-                ) : (
-                  dayEntries.map((entry, idx) => {
-                    const cls = classMap[entry.classId];
-                    if (!cls) return null;
-                    const color = categoryColors[cls.category as keyof typeof categoryColors] ?? '#F5C518';
-                    return (
-                      <motion.div
-                        key={`${entry.day}-${entry.classId}-${entry.startTime}`}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        animate={{ zIndex: 1 }}
-                        transition={{ delay: idx * 0.05, duration: 0.3 }}
-                        whileHover={{ scale: 1.04, zIndex: 20 }}
-                        className="absolute left-1 right-1 rounded p-1.5 overflow-hidden cursor-default"
-                        style={{
-                          top: `${timeToPercent(entry.startTime)}%`,
-                          height: `${durationToPercent(entry.startTime, entry.endTime)}%`,
-                          backgroundColor: color + 'CC',
-                        }}
-                      >
-                        <p className="text-white text-[11px] font-bold leading-tight truncate">
-                          {cls.title}
-                        </p>
-                        <p className="text-white/70 text-[10px] leading-tight">
-                          {entry.startTime}–{entry.endTime}
-                        </p>
-                      </motion.div>
+                  {/* Day cells */}
+                  {DAYS.map((day) => {
+                    const isSunday = day.key === 'duminica';
+                    const entry = scheduleEntries.find(
+                      (e) => e.day === day.key && e.startTime === slot
                     );
-                  })
-                )}
-              </div>
-            </div>
-          );
-        })}
+                    const cls = entry ? classMap[entry.classId] : null;
+                    const color = cls ? categoryColors[cls.category] : null;
+
+                    return (
+                      <td key={day.key} className="py-2 px-1.5">
+                        {isSunday ? (
+                          rowIdx === Math.floor(activeSlots.length / 2) ? (
+                            <div className="text-center text-muted/50 text-xs font-medium">Închis</div>
+                          ) : null
+                        ) : cls && color ? (
+                          <motion.div
+                            initial={{ opacity: 0, y: 4 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: rowIdx * 0.03, duration: 0.25 }}
+                            className="rounded-lg px-2.5 py-2.5"
+                            style={{ backgroundColor: color + 'CC' }}
+                          >
+                            <p className="text-white text-[11px] font-bold leading-tight">
+                              {cls.title}
+                            </p>
+                            <p className="text-white/70 text-[10px] mt-0.5">
+                              {entry!.startTime}–{entry!.endTime}
+                            </p>
+                          </motion.div>
+                        ) : null}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
 
       {/* Mobile: tabs */}
@@ -157,9 +132,9 @@ export default function ScheduleGrid() {
         </AnimatePresence>
       </div>
 
-      {/* Legend */}
+      {/* Legend — only categories actually used */}
       <div className="flex flex-wrap gap-4 mt-6 pt-4 border-t border-white/10">
-        {Object.entries(categoryColors).map(([category, color]) => (
+        {Object.entries(activeCategoryColors).map(([category, color]) => (
           <div key={category} className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: color }} />
             <span className="text-muted text-sm">{category}</span>

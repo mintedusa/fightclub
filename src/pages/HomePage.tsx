@@ -13,11 +13,13 @@ export default function HomePage() {
   return (
     <>
       <Helmet>
-        <title>FightClub Galați — Sala de Fitness #1 din Galați</title>
-        <meta
-          name="description"
-          content="Antrenează-te la FightClub Galați. Mortal Kombat, Bosu, SuperFit, Pilates și mai mult. Strada Saturn 34, Galați."
-        />
+        <title>FightClub Galați — Sală de Fitness & Aerobic | Strada Saturn 34</title>
+        <meta name="description" content="Sală de fitness și aerobic în Galați. Clase de grup: Mortal Kombat, Body Pump, Pilates, Tabata, SuperFit. Abonamente de la 40 lei. Strada Saturn 34." />
+        <link rel="canonical" href="https://fightclubgalati.ro/" />
+        <meta property="og:title" content="FightClub Galați — Sală de Fitness & Aerobic" />
+        <meta property="og:description" content="Sală de fitness și aerobic în Galați. Clase de grup, instructori certificați, abonamente flexibile. Înscrie-te azi!" />
+        <meta property="og:url" content="https://fightclubgalati.ro/" />
+        <meta property="og:image" content="https://fightclubgalati.ro/hero-poster.jpg" />
       </Helmet>
 
       <HeroSection />
