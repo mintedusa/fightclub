@@ -1,9 +1,9 @@
 import type { Trainer } from '../types';
 import ionutImg from '../assets/Ionut.webp';
-import narcisaImg from '../assets/Narcisa.jpeg';
-import stefuImg from '../assets/Stefu-Veronica.jpeg';
-import gabrielImg from '../assets/Gabriel-Dinu.jpeg';
-import anaImg from '../assets/Ana.jpeg';
+import narcisaImg from '../assets/Narcisa.webp';
+import stefuImg from '../assets/Stefu-Veronica.webp';
+import gabrielImg from '../assets/Gabriel-Dinu.webp';
+import anaImg from '../assets/Ana.webp';
 
 export const trainers: Trainer[] = [
   {
