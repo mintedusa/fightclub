@@ -11,6 +11,7 @@ const navItems: NavItem[] = [
   { label: 'Clase',    href: '/clase'    },
   { label: 'Orar',     href: '/orar'     },
   { label: 'Traineri', href: '/traineri' },
+  { label: 'Prețuri',  href: '/preturi'  },
   { label: 'Contact',  href: '/contact'  },
 ];
 
