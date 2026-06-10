@@ -61,10 +61,11 @@ function smtp_send($to, $from, $reply_to, $subject, $body) {
     return substr(trim($resp), 0, 3) === '250';
 }
 
-$to      = 'contact@fightclubgalati.ro';
 $subject = "Mesaj de la $name - FightClub Galati";
 $body    = "Nume: $name\nEmail: $email\nTelefon: $phone\n\nMesaj:\n$message";
+$from    = 'contact@fightclubgalati.ro';
 
-$sent = smtp_send($to, 'contact@fightclubgalati.ro', $email, $subject, $body);
+$sent1 = smtp_send('contact@fightclubgalati.ro', $from, $email, $subject, $body);
+$sent2 = smtp_send('fightclub.narcisa@gmail.com', $from, $email, $subject, $body);
 
-echo json_encode($sent ? ['success' => true] : ['error' => 'Trimiterea a esuat']);
+echo json_encode(($sent1 || $sent2) ? ['success' => true] : ['error' => 'Trimiterea a esuat']);
