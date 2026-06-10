@@ -50,10 +50,10 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           <Link
-            to="/contact"
+            to="/preturi"
             className="hidden md:block bg-gold text-dark text-sm font-bold px-4 py-2 rounded hover:bg-gold-dark transition-colors"
           >
-            Înscrie-te
+            Abonamente
           </Link>
 
           <button
@@ -91,11 +91,11 @@ export default function Navbar() {
               </NavLink>
             ))}
             <Link
-              to="/contact"
+              to="/preturi"
               onClick={() => setMobileOpen(false)}
               className="mt-4 bg-gold text-dark text-center text-lg font-bold px-6 py-3 rounded"
             >
-              Înscrie-te
+              Abonamente
             </Link>
           </motion.div>
         )}
