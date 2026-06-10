@@ -1,4 +1,4 @@
 ---
 deployment:
   tasks:
-    - /bin/cp -r /home/arthstor/fightclubgalati.ro/fightclub-repo/dist/ /home/arthstor/fightclubgalati.ro/
+    - /bin/cp -rf /home/arthstor/fightclubgalati.ro/fightclub-repo/dist/. /home/arthstor/fightclubgalati.ro/
