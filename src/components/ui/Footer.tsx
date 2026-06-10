@@ -87,7 +87,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 text-muted text-sm mb-5">
               <li>Strada Saturn 34, Galați</li>
-              <li>0236 000 000</li>
+              <li>0752 960 301</li>
               <li>contact@fightclubgalati.ro</li>
               <li>L-V: 06:00-22:00 · S-D: 08:00-20:00</li>
             </ul>

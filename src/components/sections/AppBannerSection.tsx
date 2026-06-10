@@ -44,7 +44,7 @@ export default function AppBannerSection() {
                 <span className="text-gold">GMA</span>
               </p>
               <p className="text-muted text-sm mt-0.5">
-                Gestionează-ți abonamentul, rezervă clase și urmărește progresul.
+                Vizualizează abonamentul, orar, rezervă clase și urmărește progresul.
               </p>
             </div>
           </div>

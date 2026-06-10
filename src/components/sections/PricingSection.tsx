@@ -89,8 +89,7 @@ export default function PricingSection() {
             Planuri & <span className="text-gold">Prețuri</span>
           </h2>
           <p className="text-muted text-sm mt-3">
-            Achiziționează abonamentul direct din aplicația{' '}
-            <span className="text-gold font-semibold">GMA</span>
+            Abonamentele se achiziționează la recepția sălii sau prin contact direct.
           </p>
         </div>
 
@@ -163,7 +162,7 @@ export default function PricingSection() {
         {/* GMA CTA */}
         <div className="mt-10 text-center">
           <p className="text-muted text-sm mb-4">
-            Abonează-te direct din aplicația GMA disponibilă pe
+            Descarcă aplicația <span className="text-gold font-semibold">GMA</span> pentru orar, rezervări și gestionarea abonamentului
           </p>
           <div className="flex justify-center gap-3 flex-wrap">
             <a

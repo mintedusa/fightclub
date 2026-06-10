@@ -5,7 +5,7 @@ import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 
 const contactInfo = [
   { Icon: MapPin, text: 'Strada Saturn 34, 800647 Galați' },
-  { Icon: Phone, text: '0236 000 000' },
+  { Icon: Phone, text: '0752 960 301' },
   { Icon: Mail, text: 'contact@fightclubgalati.ro' },
   { Icon: Clock, text: 'L-V: 06:00-22:00 · S-D: 08:00-20:00' },
 ];
