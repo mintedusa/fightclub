@@ -1,6 +1,7 @@
 ---
 deployment:
   tasks:
-    - unzip -o dist.zip -d /tmp/fc-deploy
-    - /bin/cp -rf /tmp/fc-deploy/dist/. /home/arthstor/fightclubgalati.ro/
-    - rm -rf /tmp/fc-deploy
+    - "unzip -o $DEPLOYDIR/dist.zip -d /tmp/fc-deploy"
+    - "/bin/cp -rf /tmp/fc-deploy/dist/* /home/arthstor/fightclubgalati.ro/"
+    - "/bin/cp -f /tmp/fc-deploy/dist/.htaccess /home/arthstor/fightclubgalati.ro/"
+    - "rm -rf /tmp/fc-deploy"
