@@ -1,5 +1,4 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/arthstor/fightclubgalati.ro
-    - /bin/cp -r $DEPLOYDIR/dist/ $DEPLOYPATH/
+    - /bin/cp -r /home/arthstor/fightclubgalati.ro/fightclub-repo/dist/ /home/arthstor/fightclubgalati.ro/
