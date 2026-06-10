@@ -26,6 +26,12 @@ interface TrainerCardProps {
 export default function TrainerCard({ trainer, index }: TrainerCardProps) {
   const [flipped, setFlipped] = useState(false);
 
+  const handleClick = () => {
+    if (window.matchMedia('(hover: none)').matches) {
+      setFlipped((v) => !v);
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -36,6 +42,7 @@ export default function TrainerCard({ trainer, index }: TrainerCardProps) {
       style={{ perspective: 1000 }}
       onHoverStart={() => setFlipped(true)}
       onHoverEnd={() => setFlipped(false)}
+      onClick={handleClick}
     >
       <motion.div
         className="relative w-full h-full"
