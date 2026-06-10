@@ -1,42 +1,54 @@
 import type { Trainer } from '../types';
 import ionutImg from '../assets/Ionut.webp';
-import narcisaImg from '../assets/Narcisa.webp';
+import narcisaImg from '../assets/Narcisa.jpeg';
+import stefuImg from '../assets/Stefu-Veronica.jpeg';
+import gabrielImg from '../assets/Gabriel-Dinu.jpeg';
+import anaImg from '../assets/Ana.jpeg';
 
 export const trainers: Trainer[] = [
   {
-    id: 'ionut',
-    name: 'Ionuț',
-    specialty: 'Fitness & Personal Trainer',
+    id: 'narcisa-dorin',
+    name: 'Narcisa Dorin',
+    specialty: 'Master Trainer',
+    bio: 'Master trainer și fondatoarea FightClub Galați. Conduce cu energie și precizie fiecare sesiune, specializată în clase de avansați pentru rezultate maxime.',
+    avatar: narcisaImg,
+    certifications: ['Master Trainer', 'Clase Avansați'],
+    socials: { instagram: '#', facebook: '#' },
+  },
+  {
+    id: 'ionut-cocos',
+    name: 'Ionuț Cocoș',
+    specialty: 'Antrenor Personal Trainer & Kinetoterapeut',
     bio: 'Kinetoterapeut și personal trainer. Construiește programe eficiente și sigure, adaptate fiecărei persoane.',
     avatar: ionutImg,
     certifications: ['Facultatea de Educație Fizică și Sport', 'Kinetoterapie', 'Personal Trainer'],
     socials: { instagram: '#', facebook: '#' },
   },
   {
-    id: 'narcisa-dorin',
-    name: 'Narcisa Dorin',
-    specialty: 'Trainer Profesionist',
-    bio: 'Trainer profesionist specializată în clasele de avansați. Conduce cu energie și precizie fiecare sesiune pentru rezultate maxime.',
-    avatar: narcisaImg,
-    certifications: ['Trainer Profesionist', 'Clase Avansați'],
+    id: 'stefu-veronica',
+    name: 'Ștefu Veronica',
+    specialty: 'Antrenor Clase Începători & Avansați',
+    bio: 'Antrenor dedicat claselor de grup, cu o energie contagioasă care motivează atât începătorii cât și sportivii avansați să se depășească.',
+    avatar: stefuImg,
+    certifications: ['Antrenor Clase Grup', 'Aerobic & Fitness'],
     socials: { instagram: '#', facebook: '#' },
   },
   {
-    id: 'bogdan-radu',
-    name: 'Bogdan Radu',
-    specialty: 'Power Step & Strength',
-    bio: 'Power Step Level 2 Trainer cu expertiză în olimpic lifting și programare pentru forță maximă.',
-    avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=400&q=80',
-    certifications: ['Power Step L2', 'NSCA-CSCS', 'Olympic Weightlifting'],
+    id: 'dinu-gabriel',
+    name: 'Dinu Gabriel',
+    specialty: 'Antrenor Circuit Full Body',
+    bio: 'Specialist în antrenamente circuit full body, cu accent pe tonifiere, rezistență și arderea caloriilor. Antrenamentele lui sunt dinamice și eficiente.',
+    avatar: gabrielImg,
+    certifications: ['Circuit Training', 'Full Body Fitness'],
     socials: { instagram: '#', facebook: '#' },
   },
   {
-    id: 'elena-popa',
-    name: 'Elena Popa',
-    specialty: 'Spinning & Cardio',
-    bio: 'Instructor spinning certificat Schwinn cu 8 ani în industrie. Campioană la triatlon, pasionată de performanță cardio.',
-    avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&q=80',
-    certifications: ['Schwinn Cycling', 'ACE Group Fitness', 'Triathlon Coach'],
+    id: 'ana-serebrianska',
+    name: 'Ana Serebrianska',
+    specialty: 'Antrenor Pilates & Stretching',
+    bio: 'Instructor Pilates & Stretching, pasionată de mișcarea controlată și flexibilitate. Sesiunile ei combină tehnica Pilates cu stretching profund pentru o recuperare optimă.',
+    avatar: anaImg,
+    certifications: ['Pilates Instructor', 'Stretching & Mobilitate'],
     socials: { instagram: '#', facebook: '#' },
   },
 ];
