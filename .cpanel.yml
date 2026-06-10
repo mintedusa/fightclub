@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=$HOME/public_html
+    - export DEPLOYPATH=$HOME/fightclubgalati.ro
     - /bin/cp -rf $DEPLOYDIR/dist/. $DEPLOYPATH/
