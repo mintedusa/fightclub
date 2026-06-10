@@ -32,7 +32,7 @@ export default function TrainerCard({ trainer, index }: TrainerCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="relative h-80 cursor-pointer"
+      className="relative h-[23rem] sm:h-80 cursor-pointer"
       style={{ perspective: 1000 }}
       onHoverStart={() => setFlipped(true)}
       onHoverEnd={() => setFlipped(false)}
