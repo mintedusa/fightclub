@@ -18,6 +18,21 @@ const classMap = Object.fromEntries(scheduleClasses.map((c) => [c.id, c]));
 // Only time slots that have at least one class
 const activeSlots = [...new Set(scheduleEntries.map((e) => e.startTime))].sort();
 
+function LevelBadge({ time }: { time: string }) {
+  const isBeginners = time === '16:30';
+  return (
+    <span
+      className={`text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full mt-1 inline-block ${
+        isBeginners
+          ? 'bg-emerald-500/20 text-emerald-400'
+          : 'bg-gold/15 text-gold'
+      }`}
+    >
+      {isBeginners ? 'Începători' : 'Avansați'}
+    </span>
+  );
+}
+
 export default function ScheduleGrid() {
   const [activeDay, setActiveDay] = useState<DayKey>('luni');
 
@@ -53,6 +68,7 @@ export default function ScheduleGrid() {
                     {endTime && (
                       <span className="text-[10px] text-muted/60">–{endTime}</span>
                     )}
+                    <LevelBadge time={slot} />
                   </td>
 
                   {/* Day cells */}
@@ -141,6 +157,16 @@ export default function ScheduleGrid() {
           </div>
         ))}
       </div>
+      <div className="flex flex-wrap gap-3 mt-3">
+        <div className="flex items-center gap-2">
+          <span className="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400">Începători</span>
+          <span className="text-muted text-xs">Clasele de la 16:30</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full bg-gold/15 text-gold">Avansați</span>
+          <span className="text-muted text-xs">Restul claselor</span>
+        </div>
+      </div>
     </div>
   );
 }
@@ -169,7 +195,10 @@ function MobileDayList({ day }: { day: DayKey }) {
             <div>
               <p className="text-white font-bold">{cls.title}</p>
               <p className="text-muted text-sm">{entry.startTime} – {entry.endTime}</p>
-              <p className="text-xs mt-1 font-medium" style={{ color }}>{cls.category}</p>
+              <div className="flex items-center gap-2 mt-1">
+                <p className="text-xs font-medium" style={{ color }}>{cls.category}</p>
+                <LevelBadge time={entry.startTime} />
+              </div>
             </div>
           </div>
         );

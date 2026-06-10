@@ -9,21 +9,21 @@ export interface ScheduleClass {
 }
 
 export const scheduleClasses: ScheduleClass[] = [
-  { id: 'mortal-kombat-int',    title: 'Mortal Kombat Intermediari',  category: 'Cardio'     },
-  { id: 'mortal-kombat-av',     title: 'Mortal Kombat Avansați',      category: 'Cardio'     },
-  { id: 'body-kombat-inc',      title: 'Body Kombat Începători',      category: 'Cardio'     },
-  { id: 'full-body',            title: 'Full Body',                   category: 'Funcțional' },
-  { id: 'bosu-int',             title: 'Bosu Intermediari',           category: 'Funcțional' },
-  { id: 'bosu-av',              title: 'Bosu Avansați',               category: 'Funcțional' },
-  { id: 'tabata-inc',           title: 'Tabata Începători',           category: 'Cardio'     },
-  { id: 'functional-step-av',   title: 'Functional Step Avansați',    category: 'Funcțional' },
-  { id: 'pilates',              title: 'Pilates',                     category: 'Wellness'   },
-  { id: 'body-pump-int',        title: 'Body Pump Intermediari',      category: 'Funcțional' },
-  { id: 'superfit-av',          title: 'SuperFit Avansați',           category: 'Cardio'     },
-  { id: 'superfit-inc',         title: 'SuperFit Începători',         category: 'Cardio'     },
-  { id: 'superfit-int',         title: 'SuperFit Intermediari',       category: 'Cardio'     },
-  { id: 'surpriza-av',          title: 'Surpriza Avansați',           category: 'Cardio'     },
-  { id: 'aerobic-stretching',   title: 'Aerobic Stretching',          category: 'Wellness'   },
+  { id: 'mortal-kombat-int',    title: 'Mortal Kombat',    category: 'Cardio'     },
+  { id: 'mortal-kombat-av',     title: 'Mortal Kombat',    category: 'Cardio'     },
+  { id: 'body-kombat-inc',      title: 'Body Kombat',      category: 'Cardio'     },
+  { id: 'full-body',            title: 'Full Body',        category: 'Funcțional' },
+  { id: 'bosu-int',             title: 'Bosu',             category: 'Funcțional' },
+  { id: 'bosu-av',              title: 'Bosu',             category: 'Funcțional' },
+  { id: 'tabata-inc',           title: 'Tabata',           category: 'Cardio'     },
+  { id: 'functional-step-av',   title: 'Functional Step',  category: 'Funcțional' },
+  { id: 'pilates',              title: 'Pilates',          category: 'Wellness'   },
+  { id: 'body-pump-int',        title: 'Body Pump',        category: 'Funcțional' },
+  { id: 'superfit-av',          title: 'SuperFit',         category: 'Cardio'     },
+  { id: 'superfit-inc',         title: 'SuperFit',         category: 'Cardio'     },
+  { id: 'superfit-int',         title: 'SuperFit',         category: 'Cardio'     },
+  { id: 'surpriza-av',          title: 'Surpriză',         category: 'Cardio'     },
+  { id: 'aerobic-stretching',   title: 'Aerobic Stretching', category: 'Wellness' },
 ];
 
 export const scheduleEntries: ScheduleEntry[] = [
