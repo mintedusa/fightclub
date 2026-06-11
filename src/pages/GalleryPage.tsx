@@ -6,12 +6,12 @@ import { Helmet } from 'react-helmet-async';
 const BASE = import.meta.env.BASE_URL;
 
 const videos = [
-  { id: 1, src: `${BASE}gallery/gallery-1.mp4`, title: 'Antrenament FightClub' },
-  { id: 2, src: `${BASE}gallery/gallery-2.mp4`, title: 'Clase de Grup' },
-  { id: 3, src: `${BASE}gallery/gallery-3.mp4`, title: 'Antrenament Intensiv' },
-  { id: 4, src: `${BASE}gallery/gallery-4.mp4`, title: 'Sesiune de Fitness' },
-  { id: 5, src: `${BASE}gallery/gallery-5.mp4`, title: 'Sala Nouă de Aerobic' },
-  { id: 6, src: `${BASE}gallery/gallery-6.mp4`, title: 'Sala de Forță' },
+  { id: 1, src: `${BASE}gallery/gallery-1.mp4`, poster: `${BASE}gallery/gallery-1-poster.jpg`, title: 'Antrenament FightClub' },
+  { id: 2, src: `${BASE}gallery/gallery-2.mp4`, poster: `${BASE}gallery/gallery-2-poster.jpg`, title: 'Clase de Grup' },
+  { id: 3, src: `${BASE}gallery/gallery-3.mp4`, poster: `${BASE}gallery/gallery-3-poster.jpg`, title: 'Antrenament Intensiv' },
+  { id: 4, src: `${BASE}gallery/gallery-4.mp4`, poster: `${BASE}gallery/gallery-4-poster.jpg`, title: 'Sesiune de Fitness' },
+  { id: 5, src: `${BASE}gallery/gallery-5.mp4`, poster: `${BASE}gallery/gallery-5-poster.jpg`, title: 'Sala Nouă de Aerobic' },
+  { id: 6, src: `${BASE}gallery/gallery-6.mp4`, poster: `${BASE}gallery/gallery-6-poster.jpg`, title: 'Sala de Forță' },
 ];
 
 function VideoCard({ video, onClick }: { video: typeof videos[0]; onClick: () => void }) {
@@ -31,10 +31,11 @@ function VideoCard({ video, onClick }: { video: typeof videos[0]; onClick: () =>
       <video
         ref={ref}
         src={video.src}
+        poster={video.poster}
         muted
         playsInline
         loop
-        preload="metadata"
+        preload="none"
         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300" />
