@@ -12,6 +12,7 @@ const videos = [
   { id: 4, src: `${BASE}gallery/gallery-4.mp4`, poster: `${BASE}gallery/gallery-4-poster.jpg`, title: 'Sesiune de Fitness' },
   { id: 5, src: `${BASE}gallery/gallery-5.mp4`, poster: `${BASE}gallery/gallery-5-poster.jpg`, title: 'Sala Nouă de Aerobic' },
   { id: 6, src: `${BASE}gallery/gallery-6.mp4`, poster: `${BASE}gallery/gallery-6-poster.jpg`, title: 'Sala de Forță' },
+  { id: 7, src: `${BASE}gallery/gallery-7.mp4`, poster: `${BASE}gallery/gallery-7-poster.jpg`, title: 'Antrenament' },
 ];
 
 function VideoCard({ video, onClick }: { video: typeof videos[0]; onClick: () => void }) {
