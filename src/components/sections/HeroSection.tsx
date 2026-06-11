@@ -16,9 +16,9 @@ declare module 'gsap' {
 
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
-const HERO_VIDEO        = `${import.meta.env.BASE_URL}hero.mp4`;
-const HERO_VIDEO_MOBILE = `${import.meta.env.BASE_URL}hero-mobile.mp4`;
-const HERO_POSTER       = `${import.meta.env.BASE_URL}hero-poster.jpg`;
+const HERO_VIDEO_DESKTOP = `${import.meta.env.BASE_URL}hero-desktop.mp4`;
+const HERO_VIDEO_MOBILE  = `${import.meta.env.BASE_URL}hero-mobile.mp4`;
+const HERO_POSTER        = `${import.meta.env.BASE_URL}hero-poster.jpg`;
 
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(() =>
@@ -88,7 +88,7 @@ export default function HeroSection() {
           poster={HERO_POSTER}
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src={isMobile ? HERO_VIDEO_MOBILE : HERO_VIDEO} type="video/mp4" />
+          <source src={isMobile ? HERO_VIDEO_MOBILE : HERO_VIDEO_DESKTOP} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/60" />
       </div>
