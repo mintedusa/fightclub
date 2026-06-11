@@ -4,6 +4,7 @@ import Lenis from '@studio-freight/lenis';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import BottomNav from './BottomNav';
 
 type LenisInstance = InstanceType<typeof Lenis>;
 
@@ -23,6 +24,7 @@ export default function Layout() {
       <Navbar />
       <Outlet />
       <Footer />
+      <BottomNav />
     </>
   );
 }
