@@ -93,21 +93,21 @@ export default function Footer() {
               <li>L-V: 06:00-22:00 · S-D: 08:00-20:00</li>
             </ul>
             <div className="flex gap-4">
-              <a href="#" className="text-muted hover:text-gold transition-colors" aria-label="Facebook">
+              <a href="https://www.facebook.com/fightclubgl" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-gold transition-colors" aria-label="Facebook">
                 <FacebookIcon className="w-5 h-5" />
               </a>
-              <a href="#" className="text-muted hover:text-gold transition-colors" aria-label="Instagram">
+              <a href="https://www.instagram.com/narcisa_fitness/" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-gold transition-colors" aria-label="Instagram">
                 <InstagramIcon className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-muted hover:text-gold transition-colors" aria-label="YouTube">
-                <YoutubeIcon className="w-5 h-5" />
               </a>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-6 text-center text-muted text-sm">
-          © 2026 FightClub Galați. Toate drepturile rezervate.
+        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-muted text-sm">
+          <span>© 2026 FightClub Galați. Toate drepturile rezervate.</span>
+          <Link to="/politica-confidentialitate" className="hover:text-gold transition-colors">
+            Politică de Confidențialitate
+          </Link>
         </div>
       </div>
     </footer>

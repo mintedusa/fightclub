@@ -4,7 +4,24 @@
       "Bash(/usr/local/Cellar/node/20.8.0/bin/node /usr/local/Cellar/node/20.8.0/bin/npm run dev)",
       "Bash(/usr/local/Cellar/node/26.0.0/bin/node --version)",
       "Bash(/usr/local/Cellar/node/26.0.0/bin/node /usr/local/Cellar/node/26.0.0/bin/npm run dev)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(PATH=/usr/local/Cellar/node/26.0.0/bin:__TRACKED_VAR__ npx vite build)",
+      "Bash(zip -r dist.zip dist/)",
+      "Bash(PATH=/usr/local/Cellar/node/26.0.0/bin:__TRACKED_VAR__ npx tsc --noEmit)",
+      "Bash(git rm *)",
+      "Bash(PATH=/usr/local/Cellar/node/26.0.0/bin:__TRACKED_VAR__ npx vite --host)",
+      "Bash(git pull *)",
+      "Bash(lsof -ti:5173,5174)",
+      "Bash(ffmpeg -i /tmp/fb-hero.mp4 -vf \"crop=iw:ih*0.8:0:0,scale=540:960\" -c:v libx264 -crf 28 -preset fast -an -movflags +faststart /Users/filimoncristian/Sites/fightclub/public/hero-mobile.mp4 -y)",
+      "Bash(ffmpeg -i /tmp/fb-hero.mp4 -vf \"crop=iw:ih*0.80:0:ih*0.05,scale=540:960\" -c:v libx264 -crf 28 -preset fast -an -movflags +faststart /Users/filimoncristian/Sites/fightclub/public/hero-mobile.mp4 -y)",
+      "Bash(yt-dlp --cookies-from-browser chrome -o '/tmp/gallery-5.mp4' 'https://www.facebook.com/share/r/1BVo8z6DMX/?mibextid=wwXIfr')",
+      "Bash(yt-dlp --cookies-from-browser chrome -o '/tmp/gallery-6.mp4' 'https://www.facebook.com/share/r/1GwKeVxQPZ/?mibextid=wwXIfr')",
+      "Bash(yt-dlp --cookies-from-browser chrome -o '/tmp/gallery-7.mp4' 'https://www.facebook.com/share/r/1ETXGbN3Ae/?mibextid=wwXIfr')",
+      "Bash(yt-dlp --cookies-from-browser chrome -o '/tmp/gallery-8.mp4' 'https://www.facebook.com/share/p/14eKVmAyE6W/?mibextid=wwXIfr')",
+      "Bash(wait)",
+      "Read(//private/tmp/**)",
+      "Bash(yt-dlp --cookies-from-browser chrome -o '/tmp/gallery-7-raw.mp4' 'https://www.instagram.com/p/DZaxQxouKvx/')",
+      "Bash(ffprobe -v quiet -select_streams v:0 -show_entries stream=width,height,duration -of csv=p=0 /tmp/gallery-7-raw.mp4)"
     ]
   }
 }

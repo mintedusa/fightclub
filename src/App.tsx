@@ -12,6 +12,8 @@ const ContactPage  = lazy(() => import('./pages/ContactPage'));
 const SchedulePage = lazy(() => import('./pages/SchedulePage'));
 const PricingPage  = lazy(() => import('./pages/PricingPage'));
 const GalleryPage  = lazy(() => import('./pages/GalleryPage'));
+const PrivacyPage  = lazy(() => import('./pages/PrivacyPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 const router = createBrowserRouter(
   [
@@ -26,6 +28,8 @@ const router = createBrowserRouter(
         { path: 'preturi',    element: <PricingPage />  },
         { path: 'contact',    element: <ContactPage />  },
         { path: 'galerie',    element: <GalleryPage />  },
+        { path: 'politica-confidentialitate', element: <PrivacyPage /> },
+        { path: '*',          element: <NotFoundPage /> },
       ],
     },
   ],
