@@ -46,9 +46,17 @@ export default function Footer() {
             <div className="mb-3">
               <img src={logoUrl} alt="FightClub Galați" className="h-[95px] w-auto" />
             </div>
-            <p className="text-muted text-sm leading-relaxed">
+            <p className="text-muted text-sm leading-relaxed mb-4">
               Antrenamente de grup cu instructori dedicați. FightClub Galați — unde energia te transformă.
             </p>
+            <div className="flex flex-col gap-1">
+              <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="nofollow noopener noreferrer">
+                <img src="https://etamade-com.github.io/anpc-sal-sol-logo/anpc-sal.svg" alt="Solutionarea Alternativa a Litigiilor" className="w-[180px]" />
+              </a>
+              <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="nofollow noopener noreferrer">
+                <img src="https://etamade-com.github.io/anpc-sal-sol-logo/anpc-sol.svg" alt="Solutionarea Online a Litigiilor" className="w-[180px]" />
+              </a>
+            </div>
           </div>
 
           <div>
