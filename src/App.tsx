@@ -11,6 +11,7 @@ const TrainersPage = lazy(() => import('./pages/TrainersPage'));
 const ContactPage  = lazy(() => import('./pages/ContactPage'));
 const SchedulePage = lazy(() => import('./pages/SchedulePage'));
 const PricingPage  = lazy(() => import('./pages/PricingPage'));
+const GalleryPage  = lazy(() => import('./pages/GalleryPage'));
 
 const router = createBrowserRouter(
   [
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
         { path: 'traineri',   element: <TrainersPage /> },
         { path: 'preturi',    element: <PricingPage />  },
         { path: 'contact',    element: <ContactPage />  },
+        { path: 'galerie',    element: <GalleryPage />  },
       ],
     },
   ],

@@ -31,6 +31,7 @@ const navLinks = [
   { label: 'Orar',     href: '/orar'     },
   { label: 'Traineri', href: '/traineri' },
   { label: 'Prețuri',  href: '/preturi'  },
+  { label: 'Galerie',  href: '/galerie'  },
   { label: 'Contact',  href: '/contact'  },
 ];
 
