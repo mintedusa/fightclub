@@ -1,4 +1,5 @@
 import type { GymClass } from '../types';
+import bosuImg from '../assets/bosu.jpg';
 
 export const classes: GymClass[] = [
   {
@@ -33,7 +34,7 @@ export const classes: GymClass[] = [
     title: 'Bosu',
     level: 'Intermediar',
     schedule: 'M  08:00 / 17:30 / 18:30 / 19:30',
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+    image: bosuImg,
     description: 'Antrenament pe platforma Bosu pentru echilibru, stabilitate și tonifiere musculară profundă.',
     category: 'Funcțional',
   },
