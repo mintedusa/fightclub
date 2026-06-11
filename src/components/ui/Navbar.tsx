@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
@@ -120,7 +121,8 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile full-screen overlay — z-[200] to sit above BottomNav (z-50) */}
+      {/* Mobile full-screen overlay — rendered via Portal to escape header's stacking context */}
+      {createPortal(
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -163,6 +165,7 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+      , document.body)}
     </header>
   );
 }
