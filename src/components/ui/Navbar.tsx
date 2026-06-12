@@ -136,7 +136,7 @@ export default function Navbar() {
               className="fixed inset-0 top-36 bg-dark z-[200] flex flex-col p-4 gap-3"
             >
               {/* 2×3 square grid */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-3 gap-3">
                 {navItems.map(({ href, label, Icon }, i) => (
                   <motion.button
                     key={href}
