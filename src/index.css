@@ -3,8 +3,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-gold: #C7843B;
-  --color-gold-dark: #A8692A;
+  --color-gold: #ffcb93;
+  --color-gold-dark: #e8a855;
   --color-dark: #000101;
   --color-surface: #172531;
   --color-surface-2: #2C4657;

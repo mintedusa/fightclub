@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Home, CalendarDays, Dumbbell, Tag, Film } from 'lucide-react';
 
 const items = [
@@ -13,7 +14,7 @@ export default function BottomNav() {
   return (
     <nav className="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-50">
       <div
-        className="flex items-center gap-3 px-4 py-2 rounded-full"
+        className="flex items-center gap-1 px-2 py-2 rounded-full"
         style={{
           background: 'rgba(255,255,255,0.08)',
           backdropFilter: 'blur(24px)',
@@ -28,17 +29,25 @@ export default function BottomNav() {
             to={href}
             end={href === '/'}
             className={({ isActive }) =>
-              `flex flex-col items-center gap-0.5 px-5 py-1.5 transition-all duration-200 rounded-full ${
-                isActive
-                  ? 'bg-gold/20 text-gold'
-                  : 'text-white/50 hover:text-white/80'
+              `relative flex flex-col items-center gap-0.5 px-4 py-1.5 rounded-full transition-colors duration-200 ${
+                isActive ? 'text-gold' : 'text-white/50'
               }`
             }
           >
             {({ isActive }) => (
               <>
-                <Icon className={`w-5 h-5 transition-transform duration-200 ${isActive ? 'scale-110' : ''}`} strokeWidth={isActive ? 2.5 : 1.8} />
-                <span className="text-[9px] font-semibold tracking-wide">{label}</span>
+                {isActive && (
+                  <motion.div
+                    layoutId="bottomNavBubble"
+                    className="absolute inset-0 rounded-full bg-gold/20"
+                    transition={{ type: 'spring', stiffness: 400, damping: 35 }}
+                  />
+                )}
+                <Icon
+                  className={`relative w-5 h-5 transition-transform duration-200 ${isActive ? 'scale-110' : ''}`}
+                  strokeWidth={isActive ? 2.5 : 1.8}
+                />
+                <span className="relative text-[9px] font-semibold tracking-wide">{label}</span>
               </>
             )}
           </NavLink>
