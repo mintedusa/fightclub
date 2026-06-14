@@ -33,8 +33,18 @@ function LevelBadge({ time }: { time: string }) {
   );
 }
 
+const JS_DAY_TO_KEY: Record<number, DayKey> = {
+  0: 'duminica',
+  1: 'luni',
+  2: 'marti',
+  3: 'miercuri',
+  4: 'joi',
+  5: 'vineri',
+  6: 'sambata',
+};
+
 export default function ScheduleGrid() {
-  const [activeDay, setActiveDay] = useState<DayKey>('luni');
+  const [activeDay, setActiveDay] = useState<DayKey>(JS_DAY_TO_KEY[new Date().getDay()]);
 
   return (
     <div>

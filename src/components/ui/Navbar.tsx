@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { X, Home, Dumbbell, CalendarDays, Users, Tag, Film } from 'lucide-react';
 import { useNavbarScroll } from '../../hooks/useNavbarScroll';
 import type { NavItem } from '../../types';
@@ -16,7 +16,6 @@ const navItems = [
   { label: 'Galerie',  href: '/galerie',  Icon: Film        },
 ];
 
-// kept for desktop nav type compatibility
 const desktopNavItems: NavItem[] = navItems.map(({ label, href }) => ({ label, href }));
 
 function HamburgerIcon() {
@@ -29,12 +28,27 @@ function HamburgerIcon() {
   );
 }
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
     opacity: 1, y: 0,
-    transition: { delay: i * 0.06, duration: 0.3, ease: 'easeOut' },
+    transition: { delay: i * 0.06, duration: 0.3, ease: [0.25, 0.1, 0.25, 1] },
   }),
+};
+
+const glassStyle: React.CSSProperties = {
+  background: 'linear-gradient(160deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.10) 100%)',
+  backdropFilter: 'blur(28px) saturate(200%) brightness(1.06)',
+  WebkitBackdropFilter: 'blur(28px) saturate(200%) brightness(1.06)',
+  border: '1px solid rgba(255,255,255,0.22)',
+  boxShadow: [
+    '0 12px 48px rgba(0,0,0,0.5)',
+    '0 2px 8px rgba(0,0,0,0.25)',
+    'inset 0 1.5px 0 rgba(255,255,255,0.32)',
+    'inset 0 -1px 0 rgba(0,0,0,0.15)',
+    'inset 1px 0 0 rgba(255,255,255,0.10)',
+    'inset -1px 0 0 rgba(255,255,255,0.10)',
+  ].join(', '),
 };
 
 export default function Navbar() {
@@ -48,51 +62,109 @@ export default function Navbar() {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 ${
-        mobileOpen
-          ? 'bg-dark'
-          : scrolled
-          ? 'bg-dark/90 backdrop-blur-md shadow-lg transition-all duration-300'
-          : 'bg-transparent transition-all duration-300'
-      }`}
-    >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 h-36 flex items-center justify-between">
-        <Link to="/" className="flex items-center pt-3" onClick={() => setMobileOpen(false)}>
-          <img src={logoUrl} alt="FightClub Galați" className="h-[130px] w-auto" />
-        </Link>
+    <header className="fixed top-0 left-0 right-0 z-50">
 
-        {/* Desktop nav */}
-        <ul className="hidden md:flex items-center gap-8">
-          {desktopNavItems.map((item) => (
-            <li key={item.href}>
-              <NavLink
-                to={item.href}
-                end={item.href === '/'}
-                className={({ isActive }) =>
-                  `text-[16px] font-medium transition-colors ${
-                    isActive ? 'text-gold' : 'text-white/80 hover:text-white'
-                  }`
-                }
-              >
-                {item.label}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
+      {/* ── Desktop: Liquid Glass floating bar ── */}
+      <div className="hidden md:grid grid-cols-[auto_1fr_auto] items-center px-8 pt-5 max-w-7xl mx-auto gap-6">
 
-        <div className="flex items-center gap-3">
+        {/* Logo — outside glass */}
+        <motion.div
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+        >
+          <Link to="/" className="flex items-center shrink-0">
+            <img src={logoUrl} alt="FightClub Galați" className="h-20 w-auto drop-shadow-lg" />
+          </Link>
+        </motion.div>
+
+        {/* Glass pill — only nav links */}
+        <motion.nav
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.05 }}
+          className="flex items-center justify-center px-8 py-3 rounded-full relative overflow-hidden mx-auto"
+          style={glassStyle}
+        >
+          {/* Specular shine strip across the top */}
+          <div
+            className="absolute inset-x-0 top-0 h-px"
+            style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.55) 40%, rgba(255,255,255,0.55) 60%, transparent 100%)' }}
+          />
+          {/* Subtle radial glow */}
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{ background: 'radial-gradient(ellipse 60% 80% at 50% -10%, rgba(255,255,255,0.08) 0%, transparent 70%)' }}
+          />
+
+          <ul className="relative flex items-center gap-8">
+            {desktopNavItems.map((item) => (
+              <li key={item.href}>
+                <NavLink
+                  to={item.href}
+                  end={item.href === '/'}
+                  className={({ isActive }) =>
+                    `text-[15px] font-semibold tracking-wide transition-all duration-200 ${
+                      isActive
+                        ? 'text-gold drop-shadow-[0_0_8px_rgba(199,132,59,0.6)]'
+                        : 'text-white/75 hover:text-white'
+                    }`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </motion.nav>
+
+        {/* CTA — outside glass */}
+        <motion.div
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
+        >
           <Link
             to="/preturi"
-            className="hidden md:block bg-gold text-dark text-sm font-bold px-4 py-2 rounded hover:bg-gold-dark transition-colors"
+            className="shrink-0 text-sm font-bold px-6 py-3 rounded-full transition-all duration-200 hover:scale-105 active:scale-95 block relative overflow-hidden tracking-wide"
+            style={{
+              background: 'linear-gradient(160deg, rgba(199,132,59,0.22) 0%, rgba(199,132,59,0.08) 50%, rgba(199,132,59,0.15) 100%)',
+              backdropFilter: 'blur(28px) saturate(180%)',
+              WebkitBackdropFilter: 'blur(28px) saturate(180%)',
+              border: '1px solid rgba(199,132,59,0.45)',
+              boxShadow: '0 8px 32px rgba(199,132,59,0.2), inset 0 1.5px 0 rgba(255,220,150,0.35), inset 0 -1px 0 rgba(199,132,59,0.1)',
+              color: '#ffcb93',
+            }}
           >
+            {/* shine strip */}
+            <span
+              className="pointer-events-none absolute inset-x-0 top-0 h-px"
+              style={{ background: 'linear-gradient(90deg, transparent, rgba(255,220,150,0.6), transparent)' }}
+            />
             Abonamente
           </Link>
+        </motion.div>
 
-          {/* Mobile trigger */}
+      </div>
+
+      {/* ── Mobile: original header ── */}
+      <div
+        className={`md:hidden ${
+          mobileOpen
+            ? 'bg-dark'
+            : scrolled
+            ? 'bg-dark/90 backdrop-blur-md shadow-lg'
+            : 'bg-transparent'
+        } transition-all duration-300`}
+      >
+        <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+          <Link to="/" onClick={() => setMobileOpen(false)}>
+            <img src={logoUrl} alt="FightClub Galați" className="h-16 w-auto" />
+          </Link>
+
           <button
             onClick={() => setMobileOpen((v) => !v)}
-            className="md:hidden flex items-center gap-2 text-white px-2 py-1.5"
+            className="flex items-center gap-2 text-white px-2 py-1.5"
             aria-label="Toggle menu"
           >
             <AnimatePresence mode="wait" initial={false}>
@@ -122,9 +194,9 @@ export default function Navbar() {
             </AnimatePresence>
           </button>
         </div>
-      </nav>
+      </div>
 
-      {/* Mobile full-screen overlay — Portal escapes header stacking context */}
+      {/* Mobile full-screen overlay */}
       {createPortal(
         <AnimatePresence>
           {mobileOpen && (
@@ -133,9 +205,8 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="fixed inset-0 top-36 bg-dark z-[200] flex flex-col p-4 gap-3"
+              className="fixed inset-0 top-20 bg-dark z-[200] flex flex-col p-4 gap-3"
             >
-              {/* 2×3 square grid */}
               <div className="grid grid-cols-3 gap-3">
                 {navItems.map(({ href, label, Icon }, i) => (
                   <motion.button
@@ -153,7 +224,6 @@ export default function Navbar() {
                 ))}
               </div>
 
-              {/* Liquid glass spacer */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -167,7 +237,6 @@ export default function Navbar() {
                 }}
               />
 
-              {/* CTA */}
               <motion.button
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
