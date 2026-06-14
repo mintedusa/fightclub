@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
@@ -55,6 +55,22 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navigate = useNavigate();
+  const [logoVisible, setLogoVisible] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y > lastScrollY.current && y > 60) {
+        setLogoVisible(false);
+      } else {
+        setLogoVisible(true);
+      }
+      lastScrollY.current = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const handleNav = (href: string) => {
     setMobileOpen(false);
@@ -62,7 +78,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <header className="fixed top-0 left-0 right-0 z-[300]">
 
       {/* ── Desktop: Liquid Glass floating bar ── */}
       <div className="hidden md:grid grid-cols-[auto_1fr_auto] items-center px-8 pt-5 max-w-7xl mx-auto gap-6">
@@ -147,72 +163,79 @@ export default function Navbar() {
 
       </div>
 
-      {/* ── Mobile: Liquid Glass header ── */}
-      <div
-        className="md:hidden transition-all duration-300"
-        style={mobileOpen ? { background: '#000101' } : {
-          background: 'linear-gradient(180deg, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.04) 100%)',
-          backdropFilter: 'blur(40px) saturate(220%) brightness(1.08)',
-          WebkitBackdropFilter: 'blur(40px) saturate(220%) brightness(1.08)',
-          borderBottom: '1px solid rgba(255,255,255,0.18)',
-          boxShadow: [
-            '0 8px 40px rgba(0,0,0,0.55)',
-            '0 2px 8px rgba(0,0,0,0.3)',
-            'inset 0 1.5px 0 rgba(255,255,255,0.3)',
-            'inset 0 -1px 0 rgba(0,0,0,0.2)',
-          ].join(', '),
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
-          <Link to="/" onClick={() => setMobileOpen(false)}>
-            <img src={logoUrl} alt="FightClub Galați" className="h-16 w-auto" />
-          </Link>
+      {/* ── Mobile: Two floating glass bubbles ── */}
+      <div className="md:hidden relative h-20 px-4">
 
-          <button
-            onClick={() => setMobileOpen((v) => !v)}
-            className="flex items-center gap-2 text-white px-2 py-1.5"
-            aria-label="Toggle menu"
-          >
-            <AnimatePresence mode="wait" initial={false}>
-              {mobileOpen ? (
-                <motion.span
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X className="w-5 h-5" />
-                </motion.span>
-              ) : (
-                <motion.span
-                  key="open"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="flex items-center gap-2"
-                >
-                  <HamburgerIcon />
-                  <span className="text-sm font-semibold tracking-widest uppercase">Meniu</span>
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </button>
-        </div>
+        {/* Logo — absolute stânga, dispare la scroll down */}
+        <AnimatePresence>
+          {(logoVisible || mobileOpen) && (
+            <motion.div
+              key="mobile-logo"
+              className="absolute left-4 top-1/2 -translate-y-1/2"
+              initial={{ opacity: 0, x: -16 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -16 }}
+              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              <Link to="/" onClick={() => setMobileOpen(false)} className="block">
+                <img src={logoUrl} alt="FightClub Galați" className="h-20 w-auto" />
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Menu bubble — absolute dreapta */}
+        <motion.button
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1], delay: 0.05 }}
+          onClick={() => setMobileOpen((v) => !v)}
+          aria-label="Toggle menu"
+          className="absolute right-4 top-1/2 -translate-y-1/2 overflow-hidden rounded-full px-5 py-3.5 flex items-center gap-2.5 text-white"
+          style={glassStyle}
+        >
+          <div className="absolute inset-x-0 top-0 h-px"
+            style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)' }} />
+          <AnimatePresence mode="wait" initial={false}>
+            {mobileOpen ? (
+              <motion.span key="close" className="flex items-center gap-2"
+                initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}
+              >
+                <X className="w-5 h-5" />
+                <span className="text-xs font-bold tracking-widest uppercase">Închide</span>
+              </motion.span>
+            ) : (
+              <motion.span key="open" className="flex items-center gap-2.5"
+                initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}
+              >
+                <HamburgerIcon />
+                <span className="text-xs font-bold tracking-widest uppercase">Meniu</span>
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </motion.button>
+
       </div>
 
-      {/* Mobile full-screen overlay */}
+      {/* Mobile full-screen liquid glass overlay */}
       {createPortal(
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
-              initial={{ opacity: 0 }}
+              initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="fixed inset-0 top-20 bg-dark z-[200] flex flex-col p-4 gap-3"
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-[200] flex flex-col p-4 pt-28 gap-3"
+              style={{
+                background: 'rgba(0,1,1,0.78)',
+                backdropFilter: 'blur(72px) saturate(220%)',
+                WebkitBackdropFilter: 'blur(72px) saturate(220%)',
+              }}
             >
+              {/* Nav cards — glass */}
               <div className="grid grid-cols-3 gap-3">
                 {navItems.map(({ href, label, Icon }, i) => (
                   <motion.button
@@ -222,34 +245,54 @@ export default function Navbar() {
                     initial="hidden"
                     animate="visible"
                     onClick={() => handleNav(href)}
-                    className="aspect-square bg-surface rounded-2xl p-5 text-left flex flex-col justify-between border border-white/8 active:bg-surface-2 transition-colors"
+                    className="aspect-square rounded-2xl p-5 text-left flex flex-col justify-between relative overflow-hidden active:scale-95 transition-transform"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.05) 100%)',
+                      backdropFilter: 'blur(20px)',
+                      WebkitBackdropFilter: 'blur(20px)',
+                      border: '1px solid rgba(255,255,255,0.16)',
+                      boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.22), 0 4px 16px rgba(0,0,0,0.3)',
+                    }}
                   >
+                    <div className="absolute inset-x-0 top-0 h-px"
+                      style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)' }} />
                     <Icon className="w-7 h-7 text-gold" strokeWidth={1.6} />
                     <span className="text-white text-lg font-black">{label}</span>
                   </motion.button>
                 ))}
               </div>
 
+              {/* Glass spacer */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4, duration: 0.3 }}
                 className="flex-1 rounded-2xl"
                 style={{
-                  background: 'rgba(255,255,255,0.04)',
-                  backdropFilter: 'blur(20px)',
-                  WebkitBackdropFilter: 'blur(20px)',
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)',
                   border: '1px solid rgba(255,255,255,0.08)',
+                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.1)',
                 }}
               />
 
+              {/* CTA */}
               <motion.button
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.38, duration: 0.3 }}
                 onClick={() => handleNav('/contact')}
-                className="w-full bg-gold text-dark text-center text-base font-black py-4 rounded-2xl tracking-wide"
+                className="w-full text-center text-base font-black py-4 rounded-2xl tracking-wide relative overflow-hidden"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(199,132,59,0.35) 0%, rgba(199,132,59,0.15) 100%)',
+                  backdropFilter: 'blur(20px)',
+                  WebkitBackdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(199,132,59,0.5)',
+                  boxShadow: '0 4px 20px rgba(199,132,59,0.25), inset 0 1px 0 rgba(255,220,150,0.3)',
+                  color: '#ffcb93',
+                }}
               >
+                <span className="absolute inset-x-0 top-0 h-px"
+                  style={{ background: 'linear-gradient(90deg, transparent, rgba(255,220,150,0.5), transparent)' }} />
                 Contact
               </motion.button>
             </motion.div>
