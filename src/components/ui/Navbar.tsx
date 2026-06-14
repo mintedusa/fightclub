@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { X, Home, Dumbbell, CalendarDays, Users, Tag, Film } from 'lucide-react';
-import { useNavbarScroll } from '../../hooks/useNavbarScroll';
+
 import type { NavItem } from '../../types';
 import logoUrl from '../../assets/logo.png';
 
@@ -53,7 +53,7 @@ const glassStyle: React.CSSProperties = {
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const scrolled = useNavbarScroll(80);
+
   const navigate = useNavigate();
 
   const handleNav = (href: string) => {
@@ -147,15 +147,21 @@ export default function Navbar() {
 
       </div>
 
-      {/* ── Mobile: original header ── */}
+      {/* ── Mobile: Liquid Glass header ── */}
       <div
-        className={`md:hidden ${
-          mobileOpen
-            ? 'bg-dark'
-            : scrolled
-            ? 'bg-dark/90 backdrop-blur-md shadow-lg'
-            : 'bg-transparent'
-        } transition-all duration-300`}
+        className="md:hidden transition-all duration-300"
+        style={mobileOpen ? { background: '#000101' } : {
+          background: 'linear-gradient(180deg, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.04) 100%)',
+          backdropFilter: 'blur(40px) saturate(220%) brightness(1.08)',
+          WebkitBackdropFilter: 'blur(40px) saturate(220%) brightness(1.08)',
+          borderBottom: '1px solid rgba(255,255,255,0.18)',
+          boxShadow: [
+            '0 8px 40px rgba(0,0,0,0.55)',
+            '0 2px 8px rgba(0,0,0,0.3)',
+            'inset 0 1.5px 0 rgba(255,255,255,0.3)',
+            'inset 0 -1px 0 rgba(0,0,0,0.2)',
+          ].join(', '),
+        }}
       >
         <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
           <Link to="/" onClick={() => setMobileOpen(false)}>
