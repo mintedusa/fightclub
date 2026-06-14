@@ -9,13 +9,23 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$name    = strip_tags(trim(isset($_POST['from_name'])  ? $_POST['from_name']  : ''));
-$email   = strip_tags(trim(isset($_POST['from_email']) ? $_POST['from_email'] : ''));
-$phone   = strip_tags(trim(isset($_POST['phone'])      ? $_POST['phone']      : ''));
+// Elimină \r\n din valori folosite în headere SMTP (protecție header injection)
+function sanitize_header(string $value): string {
+    return preg_replace('/[\r\n\t]+/', ' ', strip_tags(trim($value)));
+}
+
+$name    = sanitize_header(isset($_POST['from_name'])  ? $_POST['from_name']  : '');
+$email   = filter_var(trim(isset($_POST['from_email']) ? $_POST['from_email'] : ''), FILTER_VALIDATE_EMAIL);
+$phone   = sanitize_header(isset($_POST['phone'])      ? $_POST['phone']      : '');
 $message = strip_tags(trim(isset($_POST['message'])    ? $_POST['message']    : ''));
 
 if (!$name || !$email || !$message) {
     echo json_encode(['error' => 'Campuri obligatorii lipsesc']);
+    exit;
+}
+
+if (strlen($name) > 100 || strlen($message) > 5000) {
+    echo json_encode(['error' => 'Date invalide']);
     exit;
 }
 
