@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { GraduationCap, Check } from 'lucide-react';
+import { GraduationCap, Users, Check } from 'lucide-react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 
 const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.companyname.gma&pcampaignid=web_share';
@@ -10,9 +10,9 @@ const multiMonthOffers = [
     id: 'fitness',
     label: 'Fitness',
     rows: [
-      { period: '3 Luni', total: 549, monthly: 183 },
-      { period: '6 Luni', total: 999, monthly: 166 },
-      { period: '12 Luni', total: 1799, monthly: 149 },
+      { period: '3 Luni', total: 499, monthly: 166 },
+      { period: '6 Luni', total: 899, monthly: 150 },
+      { period: '12 Luni', total: 1599, monthly: 133 },
     ],
   },
   {
@@ -91,8 +91,30 @@ export default function PricingSection() {
               <motion.div variants={itemVariants} className="bg-surface border border-white/10 rounded-2xl p-5">
                 <p className="text-xs font-black uppercase tracking-widest text-gold/70 mb-1">Fitness</p>
                 <div className="flex items-baseline gap-1.5">
-                  <span className="text-4xl font-black text-white">199</span>
+                  <span className="text-4xl font-black text-white">179</span>
                   <span className="text-muted text-sm">RON / lună</span>
+                </div>
+              </motion.div>
+
+              {/* OFERTĂ EXPERIENCE */}
+              <motion.div variants={itemVariants} className="bg-surface border border-white/10 rounded-2xl p-5">
+                <p className="text-xs font-black uppercase tracking-widest text-gold/70 mb-3">Ofertă Experience</p>
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted text-sm">7 zile experience</span>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-2xl font-black text-white">59</span>
+                      <span className="text-muted text-xs">RON</span>
+                    </div>
+                  </div>
+                  <div className="h-px bg-white/8" />
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted text-sm">14 zile experience</span>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-2xl font-black text-white">119</span>
+                      <span className="text-muted text-xs">RON</span>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
 
@@ -134,6 +156,24 @@ export default function PricingSection() {
                     <span className="text-muted text-xs">RON</span>
                   </div>
                 </div>
+              </motion.div>
+
+              {/* FAMILY */}
+              <motion.div variants={itemVariants} className="bg-surface border border-white/10 rounded-2xl p-5">
+                <div className="flex items-center gap-2 mb-1">
+                  <Users className="w-5 h-5 text-gold shrink-0" />
+                  <p className="text-xs font-black uppercase tracking-widest text-gold/70">Ofertă Family</p>
+                </div>
+                <p className="text-muted text-xs mb-3">
+                  Pentru cei cu abonament la clase care vor să aducă și o persoană la fitness — persoana de la fitness plătește doar:
+                </p>
+                <div className="flex items-baseline gap-1.5 mb-2">
+                  <span className="text-3xl font-black text-white">149</span>
+                  <span className="text-muted text-sm">RON / lună</span>
+                </div>
+                <p className="text-muted/70 text-xs italic">
+                  Condiție: abonamentele trebuie făcute în același timp.
+                </p>
               </motion.div>
 
               {/* ELEVI ȘI STUDENȚI */}
