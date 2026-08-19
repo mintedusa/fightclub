@@ -13,6 +13,9 @@ const videos = [
   { id: 5, src: `${BASE}gallery/gallery-5.mp4`, poster: `${BASE}gallery/gallery-5-poster.jpg`, title: 'Sala Nouă de Aerobic' },
   { id: 6, src: `${BASE}gallery/gallery-6.mp4`, poster: `${BASE}gallery/gallery-6-poster.jpg`, title: 'Sala de Forță' },
   { id: 7, src: `${BASE}gallery/gallery-7.mp4`, poster: `${BASE}gallery/gallery-7-poster.jpg`, title: 'Antrenament' },
+  { id: 8, src: `${BASE}gallery/gallery-8.mp4`, poster: `${BASE}gallery/gallery-8-poster.jpg`, title: 'Functional Training' },
+  { id: 9, src: `${BASE}gallery/gallery-9.mp4`, poster: `${BASE}gallery/gallery-9-poster.jpg`, title: 'Clasa Bosu' },
+  { id: 10, src: `${BASE}gallery/gallery-10.mp4`, poster: `${BASE}gallery/gallery-10-poster.jpg`, title: 'Sala de Fitness' },
 ];
 
 function VideoCard({ video, onClick }: { video: typeof videos[0]; onClick: () => void }) {
