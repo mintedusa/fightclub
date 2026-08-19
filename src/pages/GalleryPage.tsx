@@ -109,6 +109,11 @@ export default function GalleryPage() {
       <Helmet>
         <title>Galerie Video — FightClub Galați</title>
         <meta name="description" content="Urmărește videoclipuri din sala FightClub Galați — clase de grup, aerobic, sala de forță și antrenamente cu instructori dedicați." />
+        <link rel="canonical" href="https://fightclubgalati.ro/galerie" />
+        <meta property="og:title" content="Galerie Video | FightClub Galați" />
+        <meta property="og:description" content="Videoclipuri din sala FightClub Galați — clase de grup, aerobic, sala de forță și antrenamente cu instructori dedicați." />
+        <meta property="og:url" content="https://fightclubgalati.ro/galerie" />
+        <meta property="og:image" content="https://fightclubgalati.ro/hero-poster.jpg" />
       </Helmet>
 
       <main className="min-h-screen bg-dark pt-40 pb-20">
