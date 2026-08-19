@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
 import logoUrl from '../../assets/logo.png';
+import googleReviewsGraphic from '../../assets/google-reviews-graphic.png';
+
+const GOOGLE_REVIEW_URL = 'https://search.google.com/local/writereview?placeid=ChIJubJeyefetkARJMGodwLRjWQ';
 
 function FacebookIcon({ className }: { className?: string }) {
   return (
@@ -32,7 +35,14 @@ const classLinks = ['Mortal Kombat', 'Body Kombat', 'Full Body', 'Bosu', 'Tabata
 
 export default function Footer() {
   return (
-    <footer className="bg-dark border-t-2 border-gold pt-12 pb-6">
+    <>
+      <div className="bg-white py-8 flex justify-center">
+        <a href={GOOGLE_REVIEW_URL} target="_blank" rel="noopener noreferrer" className="hover:opacity-90 transition-opacity">
+          <img src={googleReviewsGraphic} alt="Lasă-ne o recenzie pe Google" className="h-16 w-auto" />
+        </a>
+      </div>
+
+      <footer className="bg-dark border-t-2 border-gold pt-12 pb-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           <div>
@@ -111,6 +121,7 @@ export default function Footer() {
           </Link>
         </div>
       </div>
-    </footer>
+      </footer>
+    </>
   );
 }
