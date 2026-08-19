@@ -60,19 +60,25 @@ export default function HeroSection() {
         '-=0.3',
       );
 
-    gsap.to(bgRef.current, {
-      y: -150,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '#hero',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
-      },
-    });
+    // Deferred so ScrollTrigger's initial position measurement (a forced
+    // reflow) doesn't compete with first paint — parallax isn't needed
+    // until the user actually scrolls.
+    const parallaxTimer = setTimeout(() => {
+      gsap.to(bgRef.current, {
+        y: -150,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+    }, 100);
 
     return () => {
       tl.kill();
+      clearTimeout(parallaxTimer);
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);

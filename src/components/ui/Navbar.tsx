@@ -5,7 +5,6 @@ import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { X, Home, Dumbbell, CalendarDays, Users, Tag, Film } from 'lucide-react';
 
 import type { NavItem } from '../../types';
-import logoUrl from '../../assets/logo.png';
 
 const navItems = [
   { label: 'Acasă',    href: '/',         Icon: Home        },
@@ -90,7 +89,7 @@ export default function Navbar() {
           transition={{ duration: 0.5, ease: 'easeOut' }}
         >
           <Link to="/" className="flex items-center shrink-0">
-            <img src={logoUrl} alt="FightClub Galați" className="h-20 w-auto drop-shadow-lg" />
+            <img src="/logo.png" alt="FightClub Galați" className="h-20 w-auto drop-shadow-lg" />
           </Link>
         </motion.div>
 
@@ -178,7 +177,7 @@ export default function Navbar() {
               transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <Link to="/" onClick={() => setMobileOpen(false)} className="block">
-                <img src={logoUrl} alt="FightClub Galați" className="h-20 w-auto" />
+                <img src="/logo.png" alt="FightClub Galați" className="h-20 w-auto" />
               </Link>
             </motion.div>
           )}
