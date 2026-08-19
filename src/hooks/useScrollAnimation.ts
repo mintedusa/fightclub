@@ -1,46 +1,60 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
+import { useLayoutEffect, useRef } from 'react';
 
 interface ScrollAnimationOptions {
   y?: number;
   duration?: number;
-  start?: string;
 }
 
+const EASE = 'cubic-bezier(0.33, 1, 0.68, 1)';
+
+/**
+ * Fade + rise a section into view on first scroll past it.
+ *
+ * Uses IntersectionObserver + CSS transitions rather than a JS animation
+ * library: opacity/transform transitions run on the compositor, so the
+ * main thread stays free during scroll.
+ */
 export function useScrollAnimation<T extends HTMLElement = HTMLElement>(
   options?: ScrollAnimationOptions,
 ) {
   const ref = useRef<T>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    const ctx = gsap.context(() => {
-      gsap.set(el, { opacity: 0, y: options?.y ?? 40 });
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-      let firstCallback = true;
-      const io = new IntersectionObserver(
-        ([entry]) => {
-          const isFirst = firstCallback;
-          firstCallback = false;
-          if (!entry.isIntersecting) return;
-          io.disconnect();
-          gsap.to(el, {
-            opacity: 1, y: 0,
-            duration: options?.duration ?? (isFirst ? 0.6 : 0.8),
-            ease: 'power2.out',
-            delay: isFirst ? 0.1 : 0,
-          });
-        },
-        { threshold: 0, rootMargin: '0px 0px -10% 0px' },
-      );
-      io.observe(el);
+    const y = options?.y ?? 40;
+    const duration = options?.duration ?? 0.7;
 
-      return () => io.disconnect();
-    }, el);
+    // Written before paint so the section never flashes in at full opacity.
+    el.style.opacity = '0';
+    el.style.transform = `translateY(${y}px)`;
+    el.style.willChange = 'opacity, transform';
 
-    return () => ctx.revert();
+    let doneTimer: number;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        io.disconnect();
+        el.style.transition = `opacity ${duration}s ${EASE}, transform ${duration}s ${EASE}`;
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        // Drop the compositor-layer hint once the transition has finished.
+        doneTimer = window.setTimeout(() => {
+          el.style.willChange = '';
+          el.style.transition = '';
+        }, duration * 1000 + 100);
+      },
+      { threshold: 0, rootMargin: '0px 0px -10% 0px' },
+    );
+    io.observe(el);
+
+    return () => {
+      io.disconnect();
+      clearTimeout(doneTimer);
+    };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return ref;
