@@ -5,6 +5,9 @@ import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { X, Home, Dumbbell, CalendarDays, Users, Tag, Film } from 'lucide-react';
 
 import type { NavItem } from '../../types';
+import googleReviewsGraphic from '../../assets/google-reviews-graphic.png';
+
+const GOOGLE_REVIEW_URL = 'https://search.google.com/local/writereview?placeid=ChIJubJeyefetkARJMGodwLRjWQ';
 
 const navItems = [
   { label: 'Acasă',    href: '/',         Icon: Home        },
@@ -261,18 +264,31 @@ export default function Navbar() {
                 ))}
               </div>
 
-              {/* Glass spacer */}
-              <motion.div
+              {/* Glass panel — review CTA */}
+              <motion.a
+                href={GOOGLE_REVIEW_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4, duration: 0.3 }}
-                className="flex-1 rounded-2xl"
+                className="flex-1 rounded-2xl flex flex-col items-center justify-center gap-4 px-5 active:scale-95 transition-transform"
                 style={{
                   background: 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)',
                   border: '1px solid rgba(255,255,255,0.08)',
                   boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.1)',
                 }}
-              />
+              >
+                <span className="text-white/70 text-xs font-bold uppercase tracking-widest text-center">
+                  Ești mulțumit de noi?
+                </span>
+                <img
+                  src={googleReviewsGraphic}
+                  alt="Lasă-ne o recenzie pe Google"
+                  className="w-full max-w-[240px] h-auto"
+                />
+              </motion.a>
 
               {/* CTA */}
               <motion.button
