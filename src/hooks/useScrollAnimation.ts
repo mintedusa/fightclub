@@ -1,8 +1,5 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface ScrollAnimationOptions {
   y?: number;
@@ -20,29 +17,27 @@ export function useScrollAnimation<T extends HTMLElement = HTMLElement>(
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      const rect = el.getBoundingClientRect();
-      const alreadyInView = rect.top < window.innerHeight;
+      gsap.set(el, { opacity: 0, y: options?.y ?? 40 });
 
-      if (alreadyInView) {
-        gsap.fromTo(el, { opacity: 0, y: options?.y ?? 40 }, {
-          opacity: 1, y: 0,
-          duration: options?.duration ?? 0.6,
-          ease: 'power2.out',
-          delay: 0.1,
-        });
-      } else {
-        gsap.fromTo(el, { opacity: 0, y: options?.y ?? 40 }, {
-          opacity: 1, y: 0,
-          duration: options?.duration ?? 0.8,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: el,
-            start: options?.start ?? 'top 90%',
-            once: true,
-            invalidateOnRefresh: true,
-          },
-        });
-      }
+      let firstCallback = true;
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          const isFirst = firstCallback;
+          firstCallback = false;
+          if (!entry.isIntersecting) return;
+          io.disconnect();
+          gsap.to(el, {
+            opacity: 1, y: 0,
+            duration: options?.duration ?? (isFirst ? 0.6 : 0.8),
+            ease: 'power2.out',
+            delay: isFirst ? 0.1 : 0,
+          });
+        },
+        { threshold: 0, rootMargin: '0px 0px -10% 0px' },
+      );
+      io.observe(el);
+
+      return () => io.disconnect();
     }, el);
 
     return () => ctx.revert();
