@@ -17,6 +17,7 @@ const videos = [
   { id: 8, src: `${BASE}gallery/gallery-8.mp4`, poster: `${BASE}gallery/gallery-8-poster.jpg`, title: 'Functional Training' },
   { id: 9, src: `${BASE}gallery/gallery-9.mp4`, poster: `${BASE}gallery/gallery-9-poster.jpg`, title: 'Clasa Bosu' },
   { id: 10, src: `${BASE}gallery/gallery-10.mp4`, poster: `${BASE}gallery/gallery-10-poster.jpg`, title: 'Sala de Fitness' },
+  { id: 11, src: `${BASE}gallery/gallery-11.mp4`, poster: `${BASE}gallery/gallery-11-poster.jpg`, title: 'Antrenament cu Gantere' },
 ];
 
 function VideoTile({
