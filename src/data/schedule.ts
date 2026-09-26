@@ -28,31 +28,31 @@ export const scheduleClasses: ScheduleClass[] = [
 
 export const scheduleEntries: ScheduleEntry[] = [
   // Luni
-  { classId: 'mortal-kombat-int',  day: 'luni',     startTime: '08:00', endTime: '09:00' },
+  { classId: 'mortal-kombat-int',  day: 'luni',     startTime: '08:10', endTime: '09:10' },
   { classId: 'body-kombat-inc',    day: 'luni',     startTime: '16:30', endTime: '17:30' },
   { classId: 'mortal-kombat-av',   day: 'luni',     startTime: '17:30', endTime: '18:30' },
   { classId: 'mortal-kombat-av',   day: 'luni',     startTime: '18:30', endTime: '19:30' },
   { classId: 'full-body',          day: 'luni',     startTime: '19:30', endTime: '20:30' },
   // Marți
-  { classId: 'bosu-int',           day: 'marti',    startTime: '08:00', endTime: '09:00' },
+  { classId: 'bosu-int',           day: 'marti',    startTime: '08:10', endTime: '09:10' },
   { classId: 'tabata-inc',         day: 'marti',    startTime: '16:30', endTime: '17:30' },
   { classId: 'bosu-av',            day: 'marti',    startTime: '17:30', endTime: '18:30' },
   { classId: 'bosu-av',            day: 'marti',    startTime: '18:30', endTime: '19:30' },
   { classId: 'bosu-int',           day: 'marti',    startTime: '19:30', endTime: '20:30' },
   // Miercuri
-  { classId: 'functional-step-av', day: 'miercuri', startTime: '08:00', endTime: '09:00' },
+  { classId: 'functional-step-av', day: 'miercuri', startTime: '08:10', endTime: '09:10' },
   { classId: 'pilates',            day: 'miercuri', startTime: '16:30', endTime: '17:30' },
   { classId: 'functional-step-av', day: 'miercuri', startTime: '17:30', endTime: '18:30' },
   { classId: 'functional-step-av', day: 'miercuri', startTime: '18:30', endTime: '19:30' },
   { classId: 'body-pump-int',      day: 'miercuri', startTime: '19:30', endTime: '20:30' },
   // Joi
-  { classId: 'superfit-av',        day: 'joi',      startTime: '08:00', endTime: '09:00' },
+  { classId: 'superfit-av',        day: 'joi',      startTime: '08:10', endTime: '09:10' },
   { classId: 'superfit-inc',       day: 'joi',      startTime: '16:30', endTime: '17:30' },
   { classId: 'superfit-av',        day: 'joi',      startTime: '17:30', endTime: '18:30' },
   { classId: 'superfit-av',        day: 'joi',      startTime: '18:30', endTime: '19:30' },
   { classId: 'superfit-int',       day: 'joi',      startTime: '19:30', endTime: '20:30' },
   // Vineri
-  { classId: 'surpriza-av',        day: 'vineri',   startTime: '08:00', endTime: '09:00' },
+  { classId: 'surpriza-av',        day: 'vineri',   startTime: '08:10', endTime: '09:10' },
   { classId: 'pilates',            day: 'vineri',   startTime: '16:30', endTime: '17:30' },
   { classId: 'surpriza-av',        day: 'vineri',   startTime: '17:30', endTime: '18:30' },
   { classId: 'surpriza-av',        day: 'vineri',   startTime: '18:30', endTime: '19:30' },
